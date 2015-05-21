@@ -52,6 +52,8 @@
 	<string>MainWindow</string>
 	<key>joindInAPIURL</key>
 	<string>https://api.joind.in/v2.1</string>
+	<key>UILaunchStoryboardName</key>
+	<string>SplashScreenView</string>
 	<key>UIMainStoryboardFile</key>
 	<string>MainStoryboard</string>
 	<key>joindInOAuthClientID</key>
