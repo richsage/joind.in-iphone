@@ -15,11 +15,11 @@
 
 
 @interface UserCommentDetailModel : NSObject {
-	NSString   *comment;
-	NSDate     *made;
-	NSUInteger  uid;
-	BOOL        active;
-	NSUInteger  id;
+    NSString   *comment;
+    NSDate     *made;
+    NSUInteger  uid;
+    BOOL        active;
+    NSUInteger  id;
 }
 
 @property (nonatomic, retain) NSString   *comment;

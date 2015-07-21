@@ -21,145 +21,145 @@
 }
 
 - (void)gotData:(NSObject *)obj {
-	TalkDetailModel *tdm = [[TalkDetailModel alloc] init];
+    TalkDetailModel *tdm = [[TalkDetailModel alloc] init];
 
-	NSDictionary *talk = [[(NSDictionary *)obj objectForKey:@"talks"] objectAtIndex:0];
-	
-	if ([[talk objectForKey:@"talk_title"] isKindOfClass:[NSString class]]) {
-		tdm.title         = [talk objectForKey:@"talk_title"];
-	} else {
-		tdm.title         = @"";
-	}
-	
-	if ([[talk objectForKey:@"speakers"] isKindOfClass:[NSArray class]]) {
+    NSDictionary *talk = [[(NSDictionary *)obj objectForKey:@"talks"] objectAtIndex:0];
+    
+    if ([[talk objectForKey:@"talk_title"] isKindOfClass:[NSString class]]) {
+        tdm.title         = [talk objectForKey:@"talk_title"];
+    } else {
+        tdm.title         = @"";
+    }
+    
+    if ([[talk objectForKey:@"speakers"] isKindOfClass:[NSArray class]]) {
         tdm.speakers = [[NSArray alloc] initWithArray:[talk objectForKey:@"speakers"]];
-	} else {
-		tdm.speakers       = [[NSArray alloc] init];
-	}
-	
-	if ([[talk objectForKey:@"slides_link"] isKindOfClass:[NSString class]]) {
-		tdm.slidesLink    = [talk objectForKey:@"slides_link"];
-	} else {
-		tdm.slidesLink    = @"";
-	}
-	
-	if ([[talk objectForKey:@"start_date"] isKindOfClass:[NSString class]]) {
+    } else {
+        tdm.speakers       = [[NSArray alloc] init];
+    }
+    
+    if ([[talk objectForKey:@"slides_link"] isKindOfClass:[NSString class]]) {
+        tdm.slidesLink    = [talk objectForKey:@"slides_link"];
+    } else {
+        tdm.slidesLink    = @"";
+    }
+    
+    if ([[talk objectForKey:@"start_date"] isKindOfClass:[NSString class]]) {
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZZZ"];
-		tdm.startDate         = [dateFormatter dateFromString:[talk objectForKey:@"start_date"]];
+        tdm.startDate         = [dateFormatter dateFromString:[talk objectForKey:@"start_date"]];
     } else {
-		tdm.startDate         = 0;
-	}
-	
-	if ([[talk objectForKey:@"talk_description"] isKindOfClass:[NSString class]]) {
-		tdm.description          = [talk objectForKey:@"talk_description"];
-	} else {
-		tdm.description          = @"";
-	}
-	
-	if ([[talk objectForKey:@"language"] isKindOfClass:[NSString class]]) {
-		tdm.lang          = [talk objectForKey:@"language"];
-	} else {
-		tdm.lang          = @"";
-	}
-	
-	if ([[talk objectForKey:@"average_rating"] isKindOfClass:[NSNumber class]]) {
-		tdm.rating        = [[talk objectForKey:@"average_rating"] integerValue];
-	} else {
-		tdm.rating        = 0;
-	}
-	
-	if ([[talk objectForKey:@"type"] isKindOfClass:[NSString class]]) {
-		tdm.type          = [talk objectForKey:@"type"];
-	} else {
-		tdm.type          = @"";
-	}
-	
+        tdm.startDate         = 0;
+    }
+    
+    if ([[talk objectForKey:@"talk_description"] isKindOfClass:[NSString class]]) {
+        tdm.description          = [talk objectForKey:@"talk_description"];
+    } else {
+        tdm.description          = @"";
+    }
+    
+    if ([[talk objectForKey:@"language"] isKindOfClass:[NSString class]]) {
+        tdm.lang          = [talk objectForKey:@"language"];
+    } else {
+        tdm.lang          = @"";
+    }
+    
+    if ([[talk objectForKey:@"average_rating"] isKindOfClass:[NSNumber class]]) {
+        tdm.rating        = [[talk objectForKey:@"average_rating"] integerValue];
+    } else {
+        tdm.rating        = 0;
+    }
+    
+    if ([[talk objectForKey:@"type"] isKindOfClass:[NSString class]]) {
+        tdm.type          = [talk objectForKey:@"type"];
+    } else {
+        tdm.type          = @"";
+    }
+    
     if ([[talk objectForKey:@"stub"] isKindOfClass:[NSString class]]) {
         tdm.stub          = [talk objectForKey:@"stub"];
     } else {
         tdm.stub          = @"";
     }
     
-	if ([[talk objectForKey:@"comment_count"] isKindOfClass:[NSNumber class]]) {
-		tdm.commentCount   = [[talk objectForKey:@"comment_count"] integerValue];
-	} else {
-		tdm.commentCount   = 0;
-	}
-	
-	if ([[talk objectForKey:@"comments_enabled"] isKindOfClass:[NSNumber class]]) {
-		tdm.allowComments = ([[talk objectForKey:@"comments_enabled"] integerValue] == 1);
-	} else {
-		tdm.allowComments = NO;
-	}
-	
-	if ([[talk objectForKey:@"tracks"] isKindOfClass:[NSArray class]]) {
-		NSArray *tks = [talk objectForKey:@"tracks"];
-		TrackDetailModel *tkdm;
-		for (NSDictionary *tk in tks) {
-			tkdm = [[TrackDetailModel alloc] init];
-			
-			if ([[tk objectForKey:@"track_name"] isKindOfClass:[NSString class]]) {
-				tkdm.name = [tk objectForKey:@"track_name"];
-			} else {
-				tkdm.name = @"";
-			}
-			
-			if ([[tk objectForKey:@"track_desc"] isKindOfClass:[NSString class]]) {
-				tkdm.desc = [tk objectForKey:@"track_desc"];
-			} else {
-				tkdm.desc = @"";
-			}
-			
-			if ([[tk objectForKey:@"track_color"] isKindOfClass:[NSString class]]) {
-				tkdm.color = [tk objectForKey:@"track_color"];
-			} else {
-				tkdm.color = @"";
-			}
-			
-			[tdm.tracks addTrack:tkdm];
-			[tkdm release];
-		}
-	}
-	
-	if ([[talk objectForKey:@"uri"] isKindOfClass:[NSString class]]) {
-		tdm.uri		 = [talk objectForKey:@"uri"];
-	} else {
-		tdm.uri		 = @"";
-	}
-	if ([[talk objectForKey:@"verbose_uri"] isKindOfClass:[NSString class]]) {
-		tdm.verboseURI		 = [talk objectForKey:@"verbose_uri"];
-	} else {
-		tdm.verboseURI		 = @"";
-	}
-	if ([[talk objectForKey:@"website_uri"] isKindOfClass:[NSString class]]) {
-		tdm.websiteURI		 = [talk objectForKey:@"website_uri"];
-	} else {
-		tdm.websiteURI		 = @"";
-	}
-	if ([[talk objectForKey:@"comments_uri"] isKindOfClass:[NSString class]]) {
-		tdm.commentsURI		 = [talk objectForKey:@"comments_uri"];
-	} else {
-		tdm.commentsURI		 = @"";
-	}
-	if ([[talk objectForKey:@"starred_uri"] isKindOfClass:[NSString class]]) {
-		tdm.starredURI		 = [talk objectForKey:@"starred_uri"];
-	} else {
-		tdm.starredURI		 = @"";
-	}
-	if ([[talk objectForKey:@"verbose_comments_uri"] isKindOfClass:[NSString class]]) {
-		tdm.verboseCommentsURI		 = [talk objectForKey:@"verbose_comments_uri"];
-	} else {
-		tdm.verboseCommentsURI		 = @"";
-	}
-	if ([[talk objectForKey:@"event_uri"] isKindOfClass:[NSString class]]) {
-		tdm.eventURI		 = [talk objectForKey:@"event_uri"];
-	} else {
-		tdm.eventURI		 = @"";
-	}
+    if ([[talk objectForKey:@"comment_count"] isKindOfClass:[NSNumber class]]) {
+        tdm.commentCount   = [[talk objectForKey:@"comment_count"] integerValue];
+    } else {
+        tdm.commentCount   = 0;
+    }
+    
+    if ([[talk objectForKey:@"comments_enabled"] isKindOfClass:[NSNumber class]]) {
+        tdm.allowComments = ([[talk objectForKey:@"comments_enabled"] integerValue] == 1);
+    } else {
+        tdm.allowComments = NO;
+    }
+    
+    if ([[talk objectForKey:@"tracks"] isKindOfClass:[NSArray class]]) {
+        NSArray *tks = [talk objectForKey:@"tracks"];
+        TrackDetailModel *tkdm;
+        for (NSDictionary *tk in tks) {
+            tkdm = [[TrackDetailModel alloc] init];
+            
+            if ([[tk objectForKey:@"track_name"] isKindOfClass:[NSString class]]) {
+                tkdm.name = [tk objectForKey:@"track_name"];
+            } else {
+                tkdm.name = @"";
+            }
+            
+            if ([[tk objectForKey:@"track_desc"] isKindOfClass:[NSString class]]) {
+                tkdm.desc = [tk objectForKey:@"track_desc"];
+            } else {
+                tkdm.desc = @"";
+            }
+            
+            if ([[tk objectForKey:@"track_color"] isKindOfClass:[NSString class]]) {
+                tkdm.color = [tk objectForKey:@"track_color"];
+            } else {
+                tkdm.color = @"";
+            }
+            
+            [tdm.tracks addTrack:tkdm];
+            [tkdm release];
+        }
+    }
+    
+    if ([[talk objectForKey:@"uri"] isKindOfClass:[NSString class]]) {
+        tdm.uri      = [talk objectForKey:@"uri"];
+    } else {
+        tdm.uri      = @"";
+    }
+    if ([[talk objectForKey:@"verbose_uri"] isKindOfClass:[NSString class]]) {
+        tdm.verboseURI       = [talk objectForKey:@"verbose_uri"];
+    } else {
+        tdm.verboseURI       = @"";
+    }
+    if ([[talk objectForKey:@"website_uri"] isKindOfClass:[NSString class]]) {
+        tdm.websiteURI       = [talk objectForKey:@"website_uri"];
+    } else {
+        tdm.websiteURI       = @"";
+    }
+    if ([[talk objectForKey:@"comments_uri"] isKindOfClass:[NSString class]]) {
+        tdm.commentsURI      = [talk objectForKey:@"comments_uri"];
+    } else {
+        tdm.commentsURI      = @"";
+    }
+    if ([[talk objectForKey:@"starred_uri"] isKindOfClass:[NSString class]]) {
+        tdm.starredURI       = [talk objectForKey:@"starred_uri"];
+    } else {
+        tdm.starredURI       = @"";
+    }
+    if ([[talk objectForKey:@"verbose_comments_uri"] isKindOfClass:[NSString class]]) {
+        tdm.verboseCommentsURI       = [talk objectForKey:@"verbose_comments_uri"];
+    } else {
+        tdm.verboseCommentsURI       = @"";
+    }
+    if ([[talk objectForKey:@"event_uri"] isKindOfClass:[NSString class]]) {
+        tdm.eventURI         = [talk objectForKey:@"event_uri"];
+    } else {
+        tdm.eventURI         = @"";
+    }
 
-	[self.delegate gotTalkDetailData:tdm error:nil];
-	[tdm release];
+    [self.delegate gotTalkDetailData:tdm error:nil];
+    [tdm release];
 
 }
 
@@ -171,13 +171,13 @@
 
 @implementation APICaller (APICaller_TalkGetDetail)
 + (TalkGetDetail *)TalkGetDetail:(id)_delegate {
-	static TalkGetDetail *t = nil;
-	if (t != nil) {
-		[t cancel];
-		[t release];
-	}	
-	t = [[TalkGetDetail alloc] initWithDelegate:_delegate];
-	return t;
+    static TalkGetDetail *t = nil;
+    if (t != nil) {
+        [t cancel];
+        [t release];
+    }   
+    t = [[TalkGetDetail alloc] initWithDelegate:_delegate];
+    return t;
 }
 @end
 

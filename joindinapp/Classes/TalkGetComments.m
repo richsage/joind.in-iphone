@@ -21,69 +21,69 @@
 }
 
 - (void)gotData:(NSObject *)obj {
-	TalkCommentListModel *tclm = [[[TalkCommentListModel alloc] init] autorelease];
-	
-	NSDictionary *d = [(NSDictionary *)obj objectForKey:@"comments"];
-	for (NSDictionary *comment in d) {
-		TalkCommentDetailModel *tcdm = [[TalkCommentDetailModel alloc] init];
-		
-		if ([[comment objectForKey:@"comment"] isKindOfClass:[NSString class]]) {
-			tcdm.comment = [comment objectForKey:@"comment"];
-		} else {
-			tcdm.comment = @"";
-		}
-		
-		if ([[comment objectForKey:@"created_date"] isKindOfClass:[NSString class]]) {
-			NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-			[dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];
-			tcdm.createdDate = [dateFormatter dateFromString:[comment objectForKey:@"created_date"]];
-		} else {
-			tcdm.createdDate = nil;
-		}
-		
-		if ([[comment objectForKey:@"rating"] isKindOfClass:[NSNumber class]]) {
-			tcdm.rating = [[comment objectForKey:@"rating"] integerValue];
-		} else {
-			tcdm.rating = 0;
-		}
-		
-		if ([[comment objectForKey:@"user_display_name"] isKindOfClass:[NSString class]]) {
-			tcdm.userDisplayName = [comment objectForKey:@"user_display_name"];
-		} else {
-			tcdm.userDisplayName = @"ANONYMOUS";
-		}
-		
-		if ([[comment objectForKey:@"user_uri"] isKindOfClass:[NSString class]]) {
-			tcdm.userURI = [[comment objectForKey:@"user_uri"] integerValue];
-		} else {
-			tcdm.userURI = 0;
-		}
-		
-		
-		//if (tdm.active && !tdm.private) {
-		[tclm addComment:tcdm];
-		//}
-		[tcdm release];
-		
-	}
-	[self.delegate gotTalkComments:tclm error:nil];
-		
+    TalkCommentListModel *tclm = [[[TalkCommentListModel alloc] init] autorelease];
+    
+    NSDictionary *d = [(NSDictionary *)obj objectForKey:@"comments"];
+    for (NSDictionary *comment in d) {
+        TalkCommentDetailModel *tcdm = [[TalkCommentDetailModel alloc] init];
+        
+        if ([[comment objectForKey:@"comment"] isKindOfClass:[NSString class]]) {
+            tcdm.comment = [comment objectForKey:@"comment"];
+        } else {
+            tcdm.comment = @"";
+        }
+        
+        if ([[comment objectForKey:@"created_date"] isKindOfClass:[NSString class]]) {
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];
+            tcdm.createdDate = [dateFormatter dateFromString:[comment objectForKey:@"created_date"]];
+        } else {
+            tcdm.createdDate = nil;
+        }
+        
+        if ([[comment objectForKey:@"rating"] isKindOfClass:[NSNumber class]]) {
+            tcdm.rating = [[comment objectForKey:@"rating"] integerValue];
+        } else {
+            tcdm.rating = 0;
+        }
+        
+        if ([[comment objectForKey:@"user_display_name"] isKindOfClass:[NSString class]]) {
+            tcdm.userDisplayName = [comment objectForKey:@"user_display_name"];
+        } else {
+            tcdm.userDisplayName = @"ANONYMOUS";
+        }
+        
+        if ([[comment objectForKey:@"user_uri"] isKindOfClass:[NSString class]]) {
+            tcdm.userURI = [[comment objectForKey:@"user_uri"] integerValue];
+        } else {
+            tcdm.userURI = 0;
+        }
+        
+        
+        //if (tdm.active && !tdm.private) {
+        [tclm addComment:tcdm];
+        //}
+        [tcdm release];
+        
+    }
+    [self.delegate gotTalkComments:tclm error:nil];
+        
 }
 
 - (void)gotError:(NSObject *)error {
-	NSLog(@"Got talk comments error %@", error);
+    NSLog(@"Got talk comments error %@", error);
 }
 
 @end
 
 @implementation APICaller (APICaller_TalkGetComments)
 + (TalkGetComments *)TalkGetComments:(id)_delegate {
-	static TalkGetComments *e = nil;
-	if (e != nil) {
-		[e cancel];
-		[e release];
-	}
-	e = [[TalkGetComments alloc] initWithDelegate:_delegate];
-	return e;
+    static TalkGetComments *e = nil;
+    if (e != nil) {
+        [e cancel];
+        [e release];
+    }
+    e = [[TalkGetComments alloc] initWithDelegate:_delegate];
+    return e;
 }
 @end

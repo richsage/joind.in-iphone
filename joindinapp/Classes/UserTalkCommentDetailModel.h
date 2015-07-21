@@ -16,9 +16,9 @@
 
 
 @interface UserTalkCommentDetailModel : UserCommentDetailModel {
-	NSUInteger  talkId;
-	NSUInteger  rating;
-	NSString   *type;    // null for normal comment, "vote" for pre-event vote
+    NSUInteger  talkId;
+    NSUInteger  rating;
+    NSString   *type;    // null for normal comment, "vote" for pre-event vote
 }
 
 @property (nonatomic, assign) NSUInteger  talkId;

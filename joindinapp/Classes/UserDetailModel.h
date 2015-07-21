@@ -15,17 +15,17 @@
 
 
 @interface UserDetailModel : NSObject {
-	NSString   *username;
-	NSString   *fullName;
-	NSString   *twitterUsername;
-	NSString   *gravatarHash;
-	NSString   *uri;
-	NSString   *verboseURI;
-	NSString   *websiteURI;
-	NSString   *talksURI;
-	NSString   *attendedEventsURI;
-	NSString   *hostedEventsURI;
-	NSString   *talkCommentsURI;
+    NSString   *username;
+    NSString   *fullName;
+    NSString   *twitterUsername;
+    NSString   *gravatarHash;
+    NSString   *uri;
+    NSString   *verboseURI;
+    NSString   *websiteURI;
+    NSString   *talksURI;
+    NSString   *attendedEventsURI;
+    NSString   *hostedEventsURI;
+    NSString   *talkCommentsURI;
 }
 
 @property (nonatomic, retain) NSString   *username;

@@ -15,18 +15,18 @@
 
 
 @interface NewCommentViewCell : UITableViewCell {
-	IBOutlet UIButton *uiSubmit;
-	IBOutlet UITextView *uiComment;
-	IBOutlet UIActivityIndicatorView *uiActivity;
-	IBOutlet UIButton *uiRating1;
-	IBOutlet UIButton *uiRating2;
-	IBOutlet UIButton *uiRating3;
-	IBOutlet UIButton *uiRating4;
-	IBOutlet UIButton *uiRating5;
-	
-	NSUInteger rating;
-	
-	id commentDelegate;
+    IBOutlet UIButton *uiSubmit;
+    IBOutlet UITextView *uiComment;
+    IBOutlet UIActivityIndicatorView *uiActivity;
+    IBOutlet UIButton *uiRating1;
+    IBOutlet UIButton *uiRating2;
+    IBOutlet UIButton *uiRating3;
+    IBOutlet UIButton *uiRating4;
+    IBOutlet UIButton *uiRating5;
+    
+    NSUInteger rating;
+    
+    id commentDelegate;
 }
 
 @property (nonatomic, retain) UIButton *uiSubmit;

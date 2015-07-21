@@ -19,24 +19,24 @@
 #import "EventAttend.h"
 
 @interface EventDetailViewController : UITableViewController {
-	EventDetailModel *event;
-	TalkListModel *talks;
-	UserCommentListModel *comments;
-	
-	// IB components
-	IBOutlet UILabel  *uiTitle;
-	IBOutlet UILabel  *uiDate;
-	IBOutlet UILabel  *uiLocation;
-	IBOutlet UILabel  *uiDesc;
-	IBOutlet UIButton *uiDescButton;
-	IBOutlet UIActivityIndicatorView *uiLoadTalksIndicator;
-	IBOutlet UIView   *uiTableHeaderView;
-	IBOutlet UISwitch *uiAttending;
-	IBOutlet UILabel  *uiAttendingLabel;
-	IBOutlet UIActivityIndicatorView *uiAttendingIndicator;
-	IBOutlet UIButton *uiComments;
-	IBOutlet UIActivityIndicatorView *uiLoading;
-	IBOutlet UIButton *uiLocationButton;
+    EventDetailModel *event;
+    TalkListModel *talks;
+    UserCommentListModel *comments;
+    
+    // IB components
+    IBOutlet UILabel  *uiTitle;
+    IBOutlet UILabel  *uiDate;
+    IBOutlet UILabel  *uiLocation;
+    IBOutlet UILabel  *uiDesc;
+    IBOutlet UIButton *uiDescButton;
+    IBOutlet UIActivityIndicatorView *uiLoadTalksIndicator;
+    IBOutlet UIView   *uiTableHeaderView;
+    IBOutlet UISwitch *uiAttending;
+    IBOutlet UILabel  *uiAttendingLabel;
+    IBOutlet UIActivityIndicatorView *uiAttendingIndicator;
+    IBOutlet UIButton *uiComments;
+    IBOutlet UIActivityIndicatorView *uiLoading;
+    IBOutlet UIButton *uiLocationButton;
 }
 
 - (IBAction)uiDescButtonPressed:(id)sender;

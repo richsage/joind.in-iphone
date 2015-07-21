@@ -19,9 +19,9 @@
 @synthesize title;
 
 -(id) initWithCoordinate:(CLLocationCoordinate2D)_coordinate title:(NSString*)_title {
-	self.coordinate = _coordinate;
-	self.title = _title;
-	return self;
+    self.coordinate = _coordinate;
+    self.title = _title;
+    return self;
 }
 
 @end

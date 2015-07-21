@@ -16,8 +16,8 @@
 
 
 @interface UserEventCommentDetailModel : UserCommentDetailModel {
-	NSUInteger  eventId;
-	NSString   *commentorName;
+    NSUInteger  eventId;
+    NSString   *commentorName;
 }
 
 @property (nonatomic, assign) NSUInteger  eventId;

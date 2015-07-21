@@ -17,14 +17,14 @@
 @implementation EventGetDetail
 
 - (void)call:(NSString *)eventURI {
-	[self callAPI:eventURI needAuth:YES];
+    [self callAPI:eventURI needAuth:YES];
 }
 
 - (void)gotData:(NSObject *)obj {
-	
-	//NSLog(@"Event is %@", event);
-	EventDetailModel *edm = [[EventDetailModel alloc] init];
-	NSDictionary *event = [(NSArray *)[(NSDictionary *)obj objectForKey:@"events"] objectAtIndex:0];
+    
+    //NSLog(@"Event is %@", event);
+    EventDetailModel *edm = [[EventDetailModel alloc] init];
+    NSDictionary *event = [(NSArray *)[(NSDictionary *)obj objectForKey:@"events"] objectAtIndex:0];
 
     if ([[event objectForKey:@"name"] isKindOfClass:[NSString class]]) {
         edm.name = [event objectForKey:@"name"];
@@ -169,27 +169,27 @@
     
     // Attending?
     edm.attending  = [[event objectForKey:@"attending"] boolValue];
-	
-	[self.delegate gotEventDetailData:edm error:nil];
-	
-	[edm release];
+    
+    [self.delegate gotEventDetailData:edm error:nil];
+    
+    [edm release];
 }
 
 - (void)gotError:(APIError *)error {
-	//NSLog(@"here");
-	[self.delegate gotEventDetailData:nil error:error];
+    //NSLog(@"here");
+    [self.delegate gotEventDetailData:nil error:error];
 }
 
 @end
 
 @implementation APICaller (APICaller_EventGetDetail)
 + (EventGetDetail *)EventGetDetail:(id)_delegate {
-	static EventGetDetail *e = nil;
-	if (e != nil) {
-		[e cancel];
-		[e release];
-	}	
-	e = [[EventGetDetail alloc] initWithDelegate:_delegate];
-	return e;
+    static EventGetDetail *e = nil;
+    if (e != nil) {
+        [e cancel];
+        [e release];
+    }   
+    e = [[EventGetDetail alloc] initWithDelegate:_delegate];
+    return e;
 }
 @end

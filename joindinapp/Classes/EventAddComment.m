@@ -17,30 +17,30 @@
 @implementation EventAddComment
 
 - (void)call:(EventDetailModel *)event comment:(NSString *)comment {
-	NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
-	[params setObject:comment forKey:@"comment"];
-	[params setObject:@"0" forKey:@"rating"];
-	[self callAPI:event.commentsURI method:@"POST" params:params needAuth:YES canCache:NO];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
+    [params setObject:comment forKey:@"comment"];
+    [params setObject:@"0" forKey:@"rating"];
+    [self callAPI:event.commentsURI method:@"POST" params:params needAuth:YES canCache:NO];
 }
 
 - (void)gotData:(NSObject *)obj {
-	[self.delegate gotAddedEventComment:nil];
+    [self.delegate gotAddedEventComment:nil];
 }
 
 - (void)gotError:(APIError *)error {
-	[self.delegate gotAddedEventComment:error];
+    [self.delegate gotAddedEventComment:error];
 }
 
 @end
 
 @implementation APICaller (APICaller_EventAddComment)
 + (EventAddComment *)EventAddComment:(id)_delegate {
-	static EventAddComment *e = nil;
-	if (e != nil) {
-		[e cancel];
-		[e release];
-	}
-	e = [[EventAddComment alloc] initWithDelegate:_delegate];
-	return e;
+    static EventAddComment *e = nil;
+    if (e != nil) {
+        [e cancel];
+        [e release];
+    }
+    e = [[EventAddComment alloc] initWithDelegate:_delegate];
+    return e;
 }
 @end

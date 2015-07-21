@@ -15,9 +15,9 @@
 
 
 @interface EventCommentsViewCell : UITableViewCell {
-	IBOutlet UILabel *uiComment;
-	IBOutlet UILabel *uiAuthor;
-	
+    IBOutlet UILabel *uiComment;
+    IBOutlet UILabel *uiAuthor;
+    
 }
 
 @property (nonatomic, retain) UILabel     *uiComment;

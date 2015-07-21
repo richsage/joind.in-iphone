@@ -18,31 +18,31 @@
 @implementation TalkAddComment
 
 - (void)call:(TalkDetailModel *)talk rating:(NSUInteger)rating comment:(NSString *)comment private:(BOOL)priv {
-	NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
-	[params setObject:[NSString stringWithFormat:@"%d", (int) rating] forKey:@"rating"];
-	[params setObject:comment forKey:@"comment"];
-	[params setObject:[NSString stringWithFormat:@"%d", priv] forKey:@"private"];
-	[self callAPI:talk.commentsURI method:@"POST" params:params needAuth:YES canCache:NO];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
+    [params setObject:[NSString stringWithFormat:@"%d", (int) rating] forKey:@"rating"];
+    [params setObject:comment forKey:@"comment"];
+    [params setObject:[NSString stringWithFormat:@"%d", priv] forKey:@"private"];
+    [self callAPI:talk.commentsURI method:@"POST" params:params needAuth:YES canCache:NO];
 }
 
 - (void)gotData:(NSObject *)obj {
-	[self.delegate gotAddedTalkComment:nil];
+    [self.delegate gotAddedTalkComment:nil];
 }
 
 - (void)gotError:(APIError *)error {
-	[self.delegate gotAddedTalkComment:error];
+    [self.delegate gotAddedTalkComment:error];
 }
 
 @end
 
 @implementation APICaller (APICaller_TalkAddComment)
 + (TalkAddComment *)TalkAddComment:(id)_delegate {
-	static TalkAddComment *e = nil;
-	if (e != nil) {
-		[e cancel];
-		[e release];
-	}
-	e = [[TalkAddComment alloc] initWithDelegate:_delegate];
-	return e;
+    static TalkAddComment *e = nil;
+    if (e != nil) {
+        [e cancel];
+        [e release];
+    }
+    e = [[TalkAddComment alloc] initWithDelegate:_delegate];
+    return e;
 }
 @end

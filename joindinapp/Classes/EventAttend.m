@@ -22,7 +22,7 @@
 }
 
 - (void)gotData:(NSObject *)obj {
-	[self.delegate gotEventAttend:nil];
+    [self.delegate gotEventAttend:nil];
 }
 
 - (void)gotError:(APIError *)error {
@@ -33,13 +33,13 @@
 
 @implementation APICaller (APICaller_EventAttend)
 + (EventAttend *)EventAttend:(id)_delegate {
-	static EventAttend *e = nil;
-	if (e != nil) {
-		[e cancel];
-		[e release];
-	}
-	e = [[EventAttend alloc] initWithDelegate:_delegate];
-	return e;
+    static EventAttend *e = nil;
+    if (e != nil) {
+        [e cancel];
+        [e release];
+    }
+    e = [[EventAttend alloc] initWithDelegate:_delegate];
+    return e;
 }
 @end
 

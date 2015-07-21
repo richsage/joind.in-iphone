@@ -19,46 +19,46 @@
 @synthesize comments;
 
 - (UserCommentListModel *)init {
-	self.comments = [NSMutableArray array];
-	return self;
+    self.comments = [NSMutableArray array];
+    return self;
 }
 
 - (void)addComment:(UserCommentDetailModel *)ucdm {
-	[ucdm retain];
-	[self.comments addObject:ucdm];
+    [ucdm retain];
+    [self.comments addObject:ucdm];
 }
 
 - (UserCommentDetailModel *)getUserCommentAtIndex:(NSUInteger)idx {
-	return [self.comments objectAtIndex:idx];
+    return [self.comments objectAtIndex:idx];
 }
 
 - (NSUInteger)getNumComments {
-	return [self.comments count];
+    return [self.comments count];
 }
 
 - (UserTalkCommentDetailModel *)getCommentForTalk:(TalkDetailModel *)talk {
-	for (id c in self.comments) {
-		if ([c class] == [UserTalkCommentDetailModel class]) {
-//			UserTalkCommentDetailModel *d = (UserTalkCommentDetailModel *)c;
-//			if (d.talkId == talk.Id) {
-//				return d;
-//			}
-		}
-	}
-	return nil;
+    for (id c in self.comments) {
+        if ([c class] == [UserTalkCommentDetailModel class]) {
+//          UserTalkCommentDetailModel *d = (UserTalkCommentDetailModel *)c;
+//          if (d.talkId == talk.Id) {
+//              return d;
+//          }
+        }
+    }
+    return nil;
 }
 
 - (UserEventCommentDetailModel *)getCommentForEvent:(EventDetailModel *)event {
-	for (id c in self.comments) {
-		if ([c class] == [UserEventCommentDetailModel class]) {
-//			UserEventCommentDetailModel *d = (UserEventCommentDetailModel *)c;
+    for (id c in self.comments) {
+        if ([c class] == [UserEventCommentDetailModel class]) {
+//          UserEventCommentDetailModel *d = (UserEventCommentDetailModel *)c;
 // TODO
-//			if (d.eventId == event.Id) {
-//				return d;
-//			}
-		}
-	}
-	return nil;
+//          if (d.eventId == event.Id) {
+//              return d;
+//          }
+        }
+    }
+    return nil;
 }
 
 @end

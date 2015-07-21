@@ -15,9 +15,9 @@
 
 
 @interface TalkCommentsViewCell : UITableViewCell {
-	IBOutlet UILabel *uiComment;
-	IBOutlet UILabel *uiAuthor;
-	IBOutlet UIImageView *uiRating;
+    IBOutlet UILabel *uiComment;
+    IBOutlet UILabel *uiAuthor;
+    IBOutlet UIImageView *uiRating;
 }
 
 @property (nonatomic, retain) UILabel     *uiComment;

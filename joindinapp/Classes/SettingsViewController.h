@@ -15,22 +15,22 @@
 
 
 @interface SettingsViewController : UIViewController {
-	IBOutlet UITextField  *uiUser;
-	IBOutlet UITextField  *uiPass;
-	IBOutlet UISwitch     *uiLimitEvents;
-	IBOutlet UIButton     *uiOk;
-	IBOutlet UIButton     *uiLogout;
-	IBOutlet UIActivityIndicatorView *uiChecking;
-	IBOutlet UIScrollView *uiContent;
-	IBOutlet UISwitch     *uiLocalTime;
-	IBOutlet UIImageView *uiUserGravatar;
-	IBOutlet UILabel *uiLoggedInText;
+    IBOutlet UITextField  *uiUser;
+    IBOutlet UITextField  *uiPass;
+    IBOutlet UISwitch     *uiLimitEvents;
+    IBOutlet UIButton     *uiOk;
+    IBOutlet UIButton     *uiLogout;
+    IBOutlet UIActivityIndicatorView *uiChecking;
+    IBOutlet UIScrollView *uiContent;
+    IBOutlet UISwitch     *uiLocalTime;
+    IBOutlet UIImageView *uiUserGravatar;
+    IBOutlet UILabel *uiLoggedInText;
 
-	// Containing views for signed-in/signed-out states
-	IBOutlet UIView *uiSigninView;
-	IBOutlet UIView *uiSignedInView;
+    // Containing views for signed-in/signed-out states
+    IBOutlet UIView *uiSigninView;
+    IBOutlet UIView *uiSignedInView;
 
-	BOOL keyboardIsShowing;
+    BOOL keyboardIsShowing;
 }
 
 @property (nonatomic, retain) UITextField  *uiUser;

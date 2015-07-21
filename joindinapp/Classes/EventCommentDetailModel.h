@@ -15,12 +15,12 @@
 
 
 @interface EventCommentDetailModel : NSObject {
-	NSString   *comment;
-	NSDate     *createdDate;
-	NSString   *userDisplayName;
-	NSString   *gravatarHash;
-	NSString   *userURI;
-	NSString   *commentURI;
+    NSString   *comment;
+    NSDate     *createdDate;
+    NSString   *userDisplayName;
+    NSString   *gravatarHash;
+    NSString   *userURI;
+    NSString   *commentURI;
 }
 
 @property (nonatomic, retain) NSString   *comment;

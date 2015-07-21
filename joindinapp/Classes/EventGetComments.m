@@ -22,73 +22,73 @@
 }
 
 - (void)gotData:(NSObject *)obj {
-	EventCommentListModel *eclm = [[[EventCommentListModel alloc] init] autorelease];
-	
-	NSDictionary *d = [(NSDictionary *)obj objectForKey:@"comments"];
-	for (NSDictionary *comment in d) {
-		EventCommentDetailModel *ecdm = [[EventCommentDetailModel alloc] init];
-		
-		if ([[comment objectForKey:@"comment"] isKindOfClass:[NSString class]]) {
-			ecdm.comment = [comment objectForKey:@"comment"];
-		} else {
-			ecdm.comment = @"";
-		}
-		
-		if ([[comment objectForKey:@"created_date"] isKindOfClass:[NSString class]]) {
-			NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-			[dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];
-			ecdm.createdDate = [dateFormatter dateFromString:[comment objectForKey:@"created_date"]];
-		} else {
-			ecdm.createdDate = nil;
-		}
-		
-		if ([[comment objectForKey:@"user_display_name"] isKindOfClass:[NSString class]]) {
-			ecdm.userDisplayName = [comment objectForKey:@"user_display_name"];
-		} else {
-			ecdm.userDisplayName = @"ANONYMOUS";
-		}
-		
-		if ([[comment objectForKey:@"gravatar_hash"] isKindOfClass:[NSString class]]) {
-			ecdm.gravatarHash = [comment objectForKey:@"gravatar_hash"];
-		} else {
-			ecdm.gravatarHash = @"";
-		}
+    EventCommentListModel *eclm = [[[EventCommentListModel alloc] init] autorelease];
+    
+    NSDictionary *d = [(NSDictionary *)obj objectForKey:@"comments"];
+    for (NSDictionary *comment in d) {
+        EventCommentDetailModel *ecdm = [[EventCommentDetailModel alloc] init];
+        
+        if ([[comment objectForKey:@"comment"] isKindOfClass:[NSString class]]) {
+            ecdm.comment = [comment objectForKey:@"comment"];
+        } else {
+            ecdm.comment = @"";
+        }
+        
+        if ([[comment objectForKey:@"created_date"] isKindOfClass:[NSString class]]) {
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];
+            ecdm.createdDate = [dateFormatter dateFromString:[comment objectForKey:@"created_date"]];
+        } else {
+            ecdm.createdDate = nil;
+        }
+        
+        if ([[comment objectForKey:@"user_display_name"] isKindOfClass:[NSString class]]) {
+            ecdm.userDisplayName = [comment objectForKey:@"user_display_name"];
+        } else {
+            ecdm.userDisplayName = @"ANONYMOUS";
+        }
+        
+        if ([[comment objectForKey:@"gravatar_hash"] isKindOfClass:[NSString class]]) {
+            ecdm.gravatarHash = [comment objectForKey:@"gravatar_hash"];
+        } else {
+            ecdm.gravatarHash = @"";
+        }
 
-		if ([[comment objectForKey:@"user_uri"] isKindOfClass:[NSString class]]) {
-			ecdm.userURI = [comment objectForKey:@"user_uri"];
-		} else {
-			ecdm.userURI = @"";
-		}
+        if ([[comment objectForKey:@"user_uri"] isKindOfClass:[NSString class]]) {
+            ecdm.userURI = [comment objectForKey:@"user_uri"];
+        } else {
+            ecdm.userURI = @"";
+        }
 
-		if ([[comment objectForKey:@"comment_uri"] isKindOfClass:[NSString class]]) {
-			ecdm.commentURI = [comment objectForKey:@"comment_uri"];
-		} else {
-			ecdm.commentURI = @"";
-		}
+        if ([[comment objectForKey:@"comment_uri"] isKindOfClass:[NSString class]]) {
+            ecdm.commentURI = [comment objectForKey:@"comment_uri"];
+        } else {
+            ecdm.commentURI = @"";
+        }
 
-		[eclm addComment:ecdm];
+        [eclm addComment:ecdm];
 
-		[ecdm release];
-		
-	}
-	[self.delegate gotEventComments:eclm error:nil];
-	
+        [ecdm release];
+        
+    }
+    [self.delegate gotEventComments:eclm error:nil];
+    
 }
 
 - (void)gotError:(NSObject *)error {
-	NSLog(@"Got event comments error %@", error);
+    NSLog(@"Got event comments error %@", error);
 }
 
 @end
 
 @implementation APICaller (APICaller_EventGetComments)
 + (EventGetComments *)EventGetComments:(id)_delegate {
-	static EventGetComments *e = nil;
-	if (e != nil) {
-		[e cancel];
-		[e release];
-	}
-	e = [[EventGetComments alloc] initWithDelegate:_delegate];
-	return e;
+    static EventGetComments *e = nil;
+    if (e != nil) {
+        [e cancel];
+        [e release];
+    }
+    e = [[EventGetComments alloc] initWithDelegate:_delegate];
+    return e;
 }
 @end

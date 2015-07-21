@@ -16,19 +16,19 @@
 
 @interface TalkCommentDetailModel : NSObject {
 
-	/*
-	 rating: integer, User rating 0-5
-	 comment: string, Comments from the user
-	 createdAt: date (from ISO 8601 string)
-	 userDisplayName: string, If a registered user made the comment, their username is here
-	 userURI: string, If a registered user made the comment, their URI
-	 */
-	
-	NSUInteger  rating;
-	NSString   *comment;
-	NSDate     *createdDate;
-	NSString   *userDisplayName;
-	NSString   *userURI;
+    /*
+     rating: integer, User rating 0-5
+     comment: string, Comments from the user
+     createdAt: date (from ISO 8601 string)
+     userDisplayName: string, If a registered user made the comment, their username is here
+     userURI: string, If a registered user made the comment, their URI
+     */
+    
+    NSUInteger  rating;
+    NSString   *comment;
+    NSDate     *createdDate;
+    NSString   *userDisplayName;
+    NSString   *userURI;
 }
 
 @property (nonatomic, assign) NSUInteger  rating;

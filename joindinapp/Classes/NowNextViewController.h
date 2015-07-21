@@ -18,9 +18,9 @@
 
 @interface NowNextViewController : UITableViewController {
 
-	EventDetailModel *event;
-	TalkListModel *talks;
-	UserCommentListModel *comments;
+    EventDetailModel *event;
+    TalkListModel *talks;
+    UserCommentListModel *comments;
 
 }
 

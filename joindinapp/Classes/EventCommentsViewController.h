@@ -18,16 +18,16 @@
 
 
 @interface EventCommentsViewController : UITableViewController {
-	EventDetailModel *event;
-	EventCommentListModel *comments;
-	BOOL commentsLoaded;
-	NewEventCommentViewCell *provideCommentCell;
-	
-	IBOutlet UILabel *uiComment;
-	IBOutlet UILabel *uiAuthor;
-	IBOutlet UITableViewCell *uiCell;
+    EventDetailModel *event;
+    EventCommentListModel *comments;
+    BOOL commentsLoaded;
+    NewEventCommentViewCell *provideCommentCell;
+    
+    IBOutlet UILabel *uiComment;
+    IBOutlet UILabel *uiAuthor;
+    IBOutlet UITableViewCell *uiCell;
 
-	BOOL signedIn;
+    BOOL signedIn;
 }
 
 @property (nonatomic, retain) EventDetailModel *event;

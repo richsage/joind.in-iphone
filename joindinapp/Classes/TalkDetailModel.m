@@ -40,75 +40,75 @@
 @synthesize eventURI;
 
 -(id)init {
-	self.tracks = [[TracksListModel alloc] init];
-	return self;
+    self.tracks = [[TracksListModel alloc] init];
+    return self;
 }
 
 -(BOOL)hasFinished {
-	return ([self.startDate compare:[NSDate dateWithTimeIntervalSinceNow:-86400]] == NSOrderedAscending);
+    return ([self.startDate compare:[NSDate dateWithTimeIntervalSinceNow:-86400]] == NSOrderedAscending);
 }
 
 -(NSComparisonResult)comparator:(TalkDetailModel *)otherModel {
-	return [self.startDate compare:otherModel.startDate];
+    return [self.startDate compare:otherModel.startDate];
 }
 
 - (NSDate *)getAdjustedDateGiven:(EventDetailModel *)event {
-	NSTimeZone *sourceTZ;
-	NSTimeZone *destTZ;
-	NSTimeZone *localTZ;
-	
-	sourceTZ = [NSTimeZone timeZoneWithName:@"UTC"];
-	localTZ = [NSTimeZone systemTimeZone];
-	
-	NSUserDefaults *userPrefs = [NSUserDefaults standardUserDefaults];
-	if ([userPrefs stringForKey:@"timezonedisplay"] == nil) {
-		[userPrefs setObject:@"event" forKey:@"timezonedisplay"];
-		[userPrefs synchronize];
-	}
-	
-	if ([[userPrefs stringForKey:@"timezonedisplay"] isEqualToString:@"event"]) {
-		destTZ = [NSTimeZone timeZoneWithName:[NSString stringWithFormat:@"%@/%@", event.tzContinent, event.tzPlace]];
-	} else {
-		destTZ = [NSTimeZone systemTimeZone];
-	}
-	
-	if (destTZ == nil) {
-		destTZ = [NSTimeZone timeZoneWithName:@"UTC"];
-	}
-	
-	NSInteger sourceGMTOffset = [sourceTZ secondsFromGMTForDate:self.startDate];
-	NSInteger destinationGMTOffset = [destTZ secondsFromGMTForDate:self.startDate];
-	NSInteger localGMTOffset = [localTZ secondsFromGMTForDate:self.startDate];
-	NSTimeInterval interval = destinationGMTOffset - sourceGMTOffset - localGMTOffset;
-	
-	//NSLog(@"Dest offset [%d] Source offset [%d]", destinationGMTOffset, sourceGMTOffset);
-	
-	NSDate* destDate = [[[NSDate alloc] initWithTimeInterval:interval sinceDate:self.startDate] autorelease];
-	return destDate;
+    NSTimeZone *sourceTZ;
+    NSTimeZone *destTZ;
+    NSTimeZone *localTZ;
+    
+    sourceTZ = [NSTimeZone timeZoneWithName:@"UTC"];
+    localTZ = [NSTimeZone systemTimeZone];
+    
+    NSUserDefaults *userPrefs = [NSUserDefaults standardUserDefaults];
+    if ([userPrefs stringForKey:@"timezonedisplay"] == nil) {
+        [userPrefs setObject:@"event" forKey:@"timezonedisplay"];
+        [userPrefs synchronize];
+    }
+    
+    if ([[userPrefs stringForKey:@"timezonedisplay"] isEqualToString:@"event"]) {
+        destTZ = [NSTimeZone timeZoneWithName:[NSString stringWithFormat:@"%@/%@", event.tzContinent, event.tzPlace]];
+    } else {
+        destTZ = [NSTimeZone systemTimeZone];
+    }
+    
+    if (destTZ == nil) {
+        destTZ = [NSTimeZone timeZoneWithName:@"UTC"];
+    }
+    
+    NSInteger sourceGMTOffset = [sourceTZ secondsFromGMTForDate:self.startDate];
+    NSInteger destinationGMTOffset = [destTZ secondsFromGMTForDate:self.startDate];
+    NSInteger localGMTOffset = [localTZ secondsFromGMTForDate:self.startDate];
+    NSTimeInterval interval = destinationGMTOffset - sourceGMTOffset - localGMTOffset;
+    
+    //NSLog(@"Dest offset [%d] Source offset [%d]", destinationGMTOffset, sourceGMTOffset);
+    
+    NSDate* destDate = [[[NSDate alloc] initWithTimeInterval:interval sinceDate:self.startDate] autorelease];
+    return destDate;
 }
 
 -(NSString *)getFormattedDateString:(EventDetailModel *)event format:(NSString *)format {
-	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-	[dateFormatter setDateFormat:format];
-	NSString *retval = [dateFormatter stringFromDate:[self getAdjustedDateGiven:event]];
-	[dateFormatter release];
- 	return retval;
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:format];
+    NSString *retval = [dateFormatter stringFromDate:[self getAdjustedDateGiven:event]];
+    [dateFormatter release];
+    return retval;
 }
 
 - (NSString *)getDateString:(EventDetailModel *)event {
-	return [self getFormattedDateString:event format:@"EEE d MMM yyyy"];
+    return [self getFormattedDateString:event format:@"EEE d MMM yyyy"];
 }
 
 - (NSString *)getSortableDateString:(EventDetailModel *)event {
-	return [self getFormattedDateString:event format:@"yyyy-MM-dd"];
+    return [self getFormattedDateString:event format:@"yyyy-MM-dd"];
 }
 
 - (NSString *)getTimeString:(EventDetailModel *)event {
-	NSString *retval = [[self getFormattedDateString:event format:@"h:mma"] lowercaseString];
-	if ([retval isEqualToString:@"12:00am"]) {
-		retval = @"";
-	}
-	return retval;
+    NSString *retval = [[self getFormattedDateString:event format:@"h:mma"] lowercaseString];
+    if ([retval isEqualToString:@"12:00am"]) {
+        retval = @"";
+    }
+    return retval;
 }
 
 - (NSString *)getPrimarySpeakerString {
@@ -133,13 +133,13 @@
 - (BOOL)onNow {
     return FALSE;
     // FIXME
-//	return [self.nowNext isEqualToString:@"now"];
+//  return [self.nowNext isEqualToString:@"now"];
 }
 
 - (BOOL)onNext {
     return FALSE;
     // FIXME
-//	return [self.nowNext isEqualToString:@"next"];
+//  return [self.nowNext isEqualToString:@"next"];
 }
 
 @end

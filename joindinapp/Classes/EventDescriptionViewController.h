@@ -16,10 +16,10 @@
 
 
 @interface EventDescriptionViewController : UIViewController {
-	EventDetailModel *event;
-	IBOutlet UITextView *uiDescription;
-	IBOutlet UIButton *uiWebsite;
-	IBOutlet UILabel  *uiHashtag;
+    EventDetailModel *event;
+    IBOutlet UITextView *uiDescription;
+    IBOutlet UIButton *uiWebsite;
+    IBOutlet UILabel  *uiHashtag;
 }
 
 @property (nonatomic, retain) EventDetailModel *event;

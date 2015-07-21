@@ -28,75 +28,75 @@
 @synthesize rating;
 
 - (IBAction) uiSubmitted:(id)sender {
-	if (self.rating == 0) {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:(NSString *)@"Please choose a rating"
-											  delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-		[alert show];
-		[alert release];
-	} else if ([self.uiComment.text isEqualToString:@"Type comment..."] || [self.uiComment.text isEqualToString:@""]) {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:(NSString *)@"Please type a comment"
-													   delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-		[self.uiComment becomeFirstResponder];
-		[alert show];
-		[alert release];
-	} else {
-		self.uiSubmit.hidden = YES;
-		[self.commentDelegate submitComment:self.uiComment.text activityIndicator:self.uiActivity rating:self.rating];
-	}
+    if (self.rating == 0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:(NSString *)@"Please choose a rating"
+                                              delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+    } else if ([self.uiComment.text isEqualToString:@"Type comment..."] || [self.uiComment.text isEqualToString:@""]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:(NSString *)@"Please type a comment"
+                                                       delegate:Nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [self.uiComment becomeFirstResponder];
+        [alert show];
+        [alert release];
+    } else {
+        self.uiSubmit.hidden = YES;
+        [self.commentDelegate submitComment:self.uiComment.text activityIndicator:self.uiActivity rating:self.rating];
+    }
 }
 
 - (IBAction) uiRatingPressed:(id)sender {
-	if (self.uiRating1.state == UIControlStateHighlighted) {
-		self.rating = 1;
-	}
-	if (self.uiRating2.state == UIControlStateHighlighted) {
-		self.rating = 2;
-	}
-	if (self.uiRating3.state == UIControlStateHighlighted) {
-		self.rating = 3;
-	}
-	if (self.uiRating4.state == UIControlStateHighlighted) {
-		self.rating = 4;
-	}
-	if (self.uiRating5.state == UIControlStateHighlighted) {
-		self.rating = 5;
-	}
+    if (self.uiRating1.state == UIControlStateHighlighted) {
+        self.rating = 1;
+    }
+    if (self.uiRating2.state == UIControlStateHighlighted) {
+        self.rating = 2;
+    }
+    if (self.uiRating3.state == UIControlStateHighlighted) {
+        self.rating = 3;
+    }
+    if (self.uiRating4.state == UIControlStateHighlighted) {
+        self.rating = 4;
+    }
+    if (self.uiRating5.state == UIControlStateHighlighted) {
+        self.rating = 5;
+    }
 
-	[self setRatingImageState: (int)self.rating];
+    [self setRatingImageState: (int)self.rating];
 }
 
 // Poor-man's initialiser
 - (void) doStuff {
-	self.rating = 0;
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(textGotFocus:)
-												 name:UITextViewTextDidBeginEditingNotification
-											   object:self.uiComment];
+    self.rating = 0;
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(textGotFocus:)
+                                                 name:UITextViewTextDidBeginEditingNotification
+                                               object:self.uiComment];
 }
 
 - (void) textGotFocus:(NSNotification*)notification {
-	if ([self.uiComment.text isEqualToString:@"Type comment..."]) {
-		self.uiComment.text = @"";
-	}
+    if ([self.uiComment.text isEqualToString:@"Type comment..."]) {
+        self.uiComment.text = @"";
+    }
 }
 
 - (void) reset {
-	[self.uiActivity stopAnimating];
-	self.uiSubmit.hidden = NO;
-	self.uiComment.text = @"";
-	self.rating = 0;
-	[self setRatingImageState: (int)self.rating];
+    [self.uiActivity stopAnimating];
+    self.uiSubmit.hidden = NO;
+    self.uiComment.text = @"";
+    self.rating = 0;
+    [self setRatingImageState: (int)self.rating];
 }
 
 - (void) setRatingImageState:(int)ratingValue {
-	NSString *off = @"rating-off.gif";
-	NSString *on = @"rating-on.gif";
+    NSString *off = @"rating-off.gif";
+    NSString *on = @"rating-on.gif";
 
-	[self.uiRating1 setImage:[UIImage imageNamed:(ratingValue > 0 ? on : off)] forState:UIControlStateNormal];
-	[self.uiRating2 setImage:[UIImage imageNamed:(ratingValue > 1 ? on : off)] forState:UIControlStateNormal];
-	[self.uiRating3 setImage:[UIImage imageNamed:(ratingValue > 2 ? on : off)] forState:UIControlStateNormal];
-	[self.uiRating4 setImage:[UIImage imageNamed:(ratingValue > 3 ? on : off)] forState:UIControlStateNormal];
-	[self.uiRating5 setImage:[UIImage imageNamed:(ratingValue > 4 ? on : off)] forState:UIControlStateNormal];
+    [self.uiRating1 setImage:[UIImage imageNamed:(ratingValue > 0 ? on : off)] forState:UIControlStateNormal];
+    [self.uiRating2 setImage:[UIImage imageNamed:(ratingValue > 1 ? on : off)] forState:UIControlStateNormal];
+    [self.uiRating3 setImage:[UIImage imageNamed:(ratingValue > 2 ? on : off)] forState:UIControlStateNormal];
+    [self.uiRating4 setImage:[UIImage imageNamed:(ratingValue > 3 ? on : off)] forState:UIControlStateNormal];
+    [self.uiRating5 setImage:[UIImage imageNamed:(ratingValue > 4 ? on : off)] forState:UIControlStateNormal];
 }
 
 @end

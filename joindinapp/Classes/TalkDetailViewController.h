@@ -16,19 +16,19 @@
 #import "EventDetailModel.h"
 
 @interface TalkDetailViewController : UIViewController {
-	TalkDetailModel  *talk;
-	EventDetailModel *event;
-	
-	IBOutlet UILabel    *uiTitle;
-	IBOutlet UILabel    *uiSpeaker;
-	IBOutlet UILabel    *uiDate;
-	IBOutlet UITextView *uiDesc;
-	IBOutlet UIImageView *uiRating;
-	IBOutlet UIButton   *uiComments;
-	IBOutlet UILabel    *uiNotRated;
-	IBOutlet UILabel    *uiNumComments;
-	IBOutlet UIActivityIndicatorView *uiLoading;
-	IBOutlet UILabel    *uiTracks;
+    TalkDetailModel  *talk;
+    EventDetailModel *event;
+    
+    IBOutlet UILabel    *uiTitle;
+    IBOutlet UILabel    *uiSpeaker;
+    IBOutlet UILabel    *uiDate;
+    IBOutlet UITextView *uiDesc;
+    IBOutlet UIImageView *uiRating;
+    IBOutlet UIButton   *uiComments;
+    IBOutlet UILabel    *uiNotRated;
+    IBOutlet UILabel    *uiNumComments;
+    IBOutlet UIActivityIndicatorView *uiLoading;
+    IBOutlet UILabel    *uiTracks;
 }
 
 @property (nonatomic, retain) TalkDetailModel  *talk;

@@ -16,7 +16,7 @@
 
 
 @interface TalkCommentListModel : NSObject {
-	NSMutableArray *comments;
+    NSMutableArray *comments;
 }
 
 @property(nonatomic, retain) NSMutableArray *comments;

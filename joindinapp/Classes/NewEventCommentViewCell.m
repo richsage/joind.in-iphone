@@ -21,22 +21,22 @@
 @synthesize EventCommentDelegate;
 
 - (IBAction) uiSubmitted:(id)sender {
-	self.uiSubmit.hidden = YES;
-	[self.EventCommentDelegate submitComment:self.uiComment.text activityIndicator:self.uiActivity];
+    self.uiSubmit.hidden = YES;
+    [self.EventCommentDelegate submitComment:self.uiComment.text activityIndicator:self.uiActivity];
 }
 
 // Poor-man's initialiser
 - (void) doStuff {
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(textGotFocus:)
-												 name:UITextViewTextDidBeginEditingNotification
-											   object:self.uiComment];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(textGotFocus:)
+                                                 name:UITextViewTextDidBeginEditingNotification
+                                               object:self.uiComment];
 }
 
 - (void) textGotFocus:(NSNotification*)notification {
-	if ([self.uiComment.text isEqualToString:@"Type comment..."]) {
-		self.uiComment.text = @"";
-	}
+    if ([self.uiComment.text isEqualToString:@"Type comment..."]) {
+        self.uiComment.text = @"";
+    }
 }
 
 - (void) reset {

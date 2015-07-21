@@ -20,38 +20,38 @@
 @synthesize events;
 
 - (EventListModel *)init {
-	self.events = [NSMutableArray array];
-	return self;
+    self.events = [NSMutableArray array];
+    return self;
 }
 
 - (void)addEvent:(EventDetailModel *)edm {
-	[edm retain];
-	[self.events addObject:edm];
+    [edm retain];
+    [self.events addObject:edm];
 }
 
 - (EventDetailModel *)getEventDetailModelAtIndex:(NSUInteger)idx {
-	return [self.events objectAtIndex:idx];
+    return [self.events objectAtIndex:idx];
 }
 
 - (void)sort {
-	[self sort:true];
+    [self sort:true];
 }
 
 - (void)sort:(BOOL)forwards {
-	[self.events sortUsingSelector:@selector(comparator:)];
-	if (!forwards) {
-		// Reverse the array
-		int n = (int)[self.events count];
-		for (int i=0; i<n/2; ++i) {
-			id c  = [self.events objectAtIndex:i];
-			[self.events replaceObjectAtIndex:i withObject:[self.events objectAtIndex:n-i-1]];
-			[self.events replaceObjectAtIndex:n-i-1 withObject:c];
-		}
-	}
+    [self.events sortUsingSelector:@selector(comparator:)];
+    if (!forwards) {
+        // Reverse the array
+        int n = (int)[self.events count];
+        for (int i=0; i<n/2; ++i) {
+            id c  = [self.events objectAtIndex:i];
+            [self.events replaceObjectAtIndex:i withObject:[self.events objectAtIndex:n-i-1]];
+            [self.events replaceObjectAtIndex:n-i-1 withObject:c];
+        }
+    }
 }
 
 - (NSUInteger)getNumEvents {
-	return [self.events count];
+    return [self.events count];
 }
 
 

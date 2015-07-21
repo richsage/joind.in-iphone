@@ -15,15 +15,15 @@
 
 
 @interface EventTalkViewCellWithTrack : UITableViewCell {
-	IBOutlet UIButton    *uiDetail;
-	IBOutlet UILabel     *uiTalkName;
-	IBOutlet UILabel     *uiSpeaker;
-	IBOutlet UIImageView *uiRating;
-	IBOutlet UILabel     *uiNumComments;
-	IBOutlet UIImageView *uiCommentBubble;
-	IBOutlet UIImageView *uiTalkType;
-	IBOutlet UILabel     *uiTime;
-	IBOutlet UILabel     *uiTracks;
+    IBOutlet UIButton    *uiDetail;
+    IBOutlet UILabel     *uiTalkName;
+    IBOutlet UILabel     *uiSpeaker;
+    IBOutlet UIImageView *uiRating;
+    IBOutlet UILabel     *uiNumComments;
+    IBOutlet UIImageView *uiCommentBubble;
+    IBOutlet UIImageView *uiTalkType;
+    IBOutlet UILabel     *uiTime;
+    IBOutlet UILabel     *uiTracks;
 }
 
 @property (nonatomic,retain) UIButton    *uiDetail;

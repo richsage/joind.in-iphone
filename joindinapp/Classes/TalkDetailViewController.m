@@ -34,127 +34,127 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-	
-	[self setupScreen:NO];
-	
-	[self.uiLoading startAnimating];
-	
-	self.uiRating.hidden      = YES;
-	self.uiNotRated.hidden    = YES;
-	self.uiNumComments.hidden = YES;
-	self.uiComments.hidden    = YES;
-	self.uiComments.enabled   = YES;
-	self.uiTracks.hidden      = YES;
+    
+    [self setupScreen:NO];
+    
+    [self.uiLoading startAnimating];
+    
+    self.uiRating.hidden      = YES;
+    self.uiNotRated.hidden    = YES;
+    self.uiNumComments.hidden = YES;
+    self.uiComments.hidden    = YES;
+    self.uiComments.enabled   = YES;
+    self.uiTracks.hidden      = YES;
 
-	TalkGetDetail *t = [APICaller TalkGetDetail:self];
-	[t call:self.talk.verboseURI];
+    TalkGetDetail *t = [APICaller TalkGetDetail:self];
+    [t call:self.talk.verboseURI];
 }
 
 -(void) gotTalkDetailData:(TalkDetailModel *)tdm error:(APIError *)error {
-	[self.uiLoading stopAnimating];
-	
-	//[self.talk release];
-	self.talk = tdm;
-	
-	[self setupScreen:YES];
-	
+    [self.uiLoading stopAnimating];
+    
+    //[self.talk release];
+    self.talk = tdm;
+    
+    [self setupScreen:YES];
+    
 }
 
 -(void)setupScreen:(BOOL)withExtraInfo {
-	
-	self.title = self.talk.title;
-	self.uiTitle.text = self.talk.title;
-	self.uiSpeaker.text = [self.talk getAllSpeakersString];
+    
+    self.title = self.talk.title;
+    self.uiTitle.text = self.talk.title;
+    self.uiSpeaker.text = [self.talk getAllSpeakersString];
 
-	NSString *dateGiven = [self.talk getDateString:self.event];
-	NSString *timeGiven = [self.talk getTimeString:self.event];
-	if (![timeGiven isEqualToString:@"12:00am"]) {
-		dateGiven = [NSString stringWithFormat:@"%@ %@", dateGiven, timeGiven];
-	}
-	
-	self.uiDate.text = dateGiven;
-	self.uiDesc.text = self.talk.description;
-	
-	if (withExtraInfo) {
-		
-		if (self.talk.commentCount == 1) {
-			self.uiNumComments.text = [NSString stringWithFormat:@"1 comment"];
-		} else {
-			self.uiNumComments.text = [NSString stringWithFormat:@"%lu comments", (unsigned long)self.talk.commentCount];
-		}
-		
-		NSString *btnLabel;
-		
-		self.uiRating.hidden      = NO;
-		self.uiNotRated.hidden    = NO;
-		self.uiNumComments.hidden = NO;
-		self.uiComments.hidden    = NO;
-		self.uiComments.enabled   = YES;
+    NSString *dateGiven = [self.talk getDateString:self.event];
+    NSString *timeGiven = [self.talk getTimeString:self.event];
+    if (![timeGiven isEqualToString:@"12:00am"]) {
+        dateGiven = [NSString stringWithFormat:@"%@ %@", dateGiven, timeGiven];
+    }
+    
+    self.uiDate.text = dateGiven;
+    self.uiDesc.text = self.talk.description;
+    
+    if (withExtraInfo) {
+        
+        if (self.talk.commentCount == 1) {
+            self.uiNumComments.text = [NSString stringWithFormat:@"1 comment"];
+        } else {
+            self.uiNumComments.text = [NSString stringWithFormat:@"%lu comments", (unsigned long)self.talk.commentCount];
+        }
+        
+        NSString *btnLabel;
+        
+        self.uiRating.hidden      = NO;
+        self.uiNotRated.hidden    = NO;
+        self.uiNumComments.hidden = NO;
+        self.uiComments.hidden    = NO;
+        self.uiComments.enabled   = YES;
 
-		if (self.talk.allowComments) {
-			
-			if (self.talk.commentCount > 0) {
-				btnLabel = @"View / add comments";
-			} else {
-				btnLabel = @"Add comment";
-			}
-			
-		} else {
-			
-			if (self.talk.commentCount > 0) {
-				
-				btnLabel = @"View comments";
-				
-			} else {
-				
-				self.uiRating.hidden      = YES;
-				self.uiNotRated.hidden    = YES;
-				self.uiNumComments.hidden = YES;
-				self.uiComments.hidden    = NO;
-				self.uiComments.enabled   = NO;
-				
-				btnLabel = @"No comments";
-			}
-			
-		}
-		
-		[self.uiComments setTitle:btnLabel forState:UIControlStateNormal];
-		[self.uiComments setTitle:btnLabel forState:UIControlStateHighlighted];
+        if (self.talk.allowComments) {
+            
+            if (self.talk.commentCount > 0) {
+                btnLabel = @"View / add comments";
+            } else {
+                btnLabel = @"Add comment";
+            }
+            
+        } else {
+            
+            if (self.talk.commentCount > 0) {
+                
+                btnLabel = @"View comments";
+                
+            } else {
+                
+                self.uiRating.hidden      = YES;
+                self.uiNotRated.hidden    = YES;
+                self.uiNumComments.hidden = YES;
+                self.uiComments.hidden    = NO;
+                self.uiComments.enabled   = NO;
+                
+                btnLabel = @"No comments";
+            }
+            
+        }
+        
+        [self.uiComments setTitle:btnLabel forState:UIControlStateNormal];
+        [self.uiComments setTitle:btnLabel forState:UIControlStateHighlighted];
         NSLog(@"%lu", (unsigned long)self.talk.rating);
-		if (self.talk.rating >= 1 && self.talk.rating <= 5) {
-			//self.uiRating.hidden   = NO;
-			self.uiRating.image    = [UIImage imageNamed:[NSString stringWithFormat:@"rating-%d.gif", (int) self.talk.rating]];
-			self.uiNotRated.hidden = YES;
-		} else {
-			//self.uiNotRated.hidden = NO;
-			self.uiRating.hidden   = YES;
-		}
-		
-		if ([self.event hasTracks]) {
-			self.uiTracks.text = [self.talk.tracks getStringTrackList];
-			self.uiTracks.hidden = NO;
-		} else {
-			self.uiTracks.text = @"";
-		}
-		
-	} else {
-		
-		self.uiRating.hidden      = YES;
-		self.uiNotRated.hidden    = YES;
-		self.uiNumComments.hidden = YES;
-		self.uiComments.hidden    = YES;
-		self.uiComments.enabled   = YES;
-		self.uiTracks.hidden      = YES;
-		
-	}
-	
+        if (self.talk.rating >= 1 && self.talk.rating <= 5) {
+            //self.uiRating.hidden   = NO;
+            self.uiRating.image    = [UIImage imageNamed:[NSString stringWithFormat:@"rating-%d.gif", (int) self.talk.rating]];
+            self.uiNotRated.hidden = YES;
+        } else {
+            //self.uiNotRated.hidden = NO;
+            self.uiRating.hidden   = YES;
+        }
+        
+        if ([self.event hasTracks]) {
+            self.uiTracks.text = [self.talk.tracks getStringTrackList];
+            self.uiTracks.hidden = NO;
+        } else {
+            self.uiTracks.text = @"";
+        }
+        
+    } else {
+        
+        self.uiRating.hidden      = YES;
+        self.uiNotRated.hidden    = YES;
+        self.uiNumComments.hidden = YES;
+        self.uiComments.hidden    = YES;
+        self.uiComments.enabled   = YES;
+        self.uiTracks.hidden      = YES;
+        
+    }
+    
 }
 
 -(IBAction)uiViewComments:(id)sender {
-	TalkCommentsViewController *vc = [[TalkCommentsViewController alloc] initWithNibName:@"TalkCommentsView" bundle:nil];
-	vc.talk = self.talk;
-	[self.navigationController pushViewController:vc animated:YES];
-	[vc release];
+    TalkCommentsViewController *vc = [[TalkCommentsViewController alloc] initWithNibName:@"TalkCommentsView" bundle:nil];
+    vc.talk = self.talk;
+    [self.navigationController pushViewController:vc animated:YES];
+    [vc release];
 }
 
 - (void)didReceiveMemoryWarning {

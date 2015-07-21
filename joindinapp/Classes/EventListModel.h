@@ -15,7 +15,7 @@
 #import "EventDetailModel.h"
 
 @interface EventListModel : NSObject {
-	NSMutableArray *events;
+    NSMutableArray *events;
 }
 
 @property(nonatomic, retain) NSMutableArray *events;

@@ -15,7 +15,7 @@
 
 
 @interface EventTalkDateHeaderViewCell : UITableViewCell {
-	IBOutlet UILabel *dateLabel;
+    IBOutlet UILabel *dateLabel;
 }
 
 @property (nonatomic, retain) UILabel *dateLabel;

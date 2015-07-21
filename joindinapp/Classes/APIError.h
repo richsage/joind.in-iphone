@@ -16,13 +16,13 @@
 typedef NSUInteger APIErrType;
 enum {
     ERR_NETWORK = 1,
-	ERR_CREDENTIALS = 2,
-	ERR_UNKNOWN = 3
+    ERR_CREDENTIALS = 2,
+    ERR_UNKNOWN = 3
 };
 
 @interface APIError : NSObject {
-	NSString *msg;
-	APIErrType type;
+    NSString *msg;
+    APIErrType type;
 }
 
 @property (nonatomic, retain) NSString *msg;

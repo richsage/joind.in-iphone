@@ -19,7 +19,7 @@
 #import "EventDetailModel.h"
 
 @interface UserCommentListModel : NSObject {
-	NSMutableArray *comments;
+    NSMutableArray *comments;
 }
 
 @property(nonatomic, retain) NSMutableArray *comments;

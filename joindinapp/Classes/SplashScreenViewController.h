@@ -18,12 +18,12 @@
 #import "TalkGetDetail.h"
 
 @interface SplashScreenViewController : UIViewController <EventGetDetailResponse, TalkGetDetailResponse> {
-	IBOutlet UIActivityIndicatorView *uiLoading;
-	UINavigationController *navC;
-	
-	BOOL havePendingAction;
-	NSUInteger pendingEventId;
-	NSUInteger pendingTalkId;
+    IBOutlet UIActivityIndicatorView *uiLoading;
+    UINavigationController *navC;
+    
+    BOOL havePendingAction;
+    NSUInteger pendingEventId;
+    NSUInteger pendingTalkId;
 }
 
 - (IBAction) pressedWebsite;

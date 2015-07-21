@@ -20,21 +20,21 @@
 @synthesize comments;
 
 - (TalkCommentListModel *)init {
-	self.comments = [NSMutableArray array];
-	return self;
+    self.comments = [NSMutableArray array];
+    return self;
 }
 
 - (void)addComment:(TalkCommentDetailModel *)tcdm {
-	[tcdm retain];
-	[self.comments addObject:tcdm];
+    [tcdm retain];
+    [self.comments addObject:tcdm];
 }
 
 - (TalkCommentDetailModel *)getTalkCommentAtIndex:(NSUInteger)idx {
-	return [self.comments objectAtIndex:idx];
+    return [self.comments objectAtIndex:idx];
 }
 
 - (NSUInteger)getNumComments {
-	return [self.comments count];
+    return [self.comments count];
 }
 
 @end

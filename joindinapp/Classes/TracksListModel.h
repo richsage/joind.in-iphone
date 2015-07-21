@@ -15,7 +15,7 @@
 #import "TrackDetailModel.h"
 
 @interface TracksListModel : NSObject {
-	NSMutableArray *tracks;
+    NSMutableArray *tracks;
 }
 
 @property(nonatomic, retain) NSMutableArray *tracks;

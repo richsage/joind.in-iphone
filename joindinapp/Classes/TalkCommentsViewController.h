@@ -18,19 +18,19 @@
 
 
 @interface TalkCommentsViewController : UITableViewController <CommentSubmitter> {
-	TalkDetailModel *talk;
-	TalkCommentListModel *comments;
-	NewCommentViewCell *provideCommentCell;
-	
-	IBOutlet UILabel *uiComment;
-	IBOutlet UILabel *uiAuthor;
-	IBOutlet UIImageView *uiRating;
-	IBOutlet UITableViewCell *uiCell;
-	
-	BOOL commentsLoaded;
-	BOOL scrollToEnd;
-	
-	BOOL signedIn;
+    TalkDetailModel *talk;
+    TalkCommentListModel *comments;
+    NewCommentViewCell *provideCommentCell;
+    
+    IBOutlet UILabel *uiComment;
+    IBOutlet UILabel *uiAuthor;
+    IBOutlet UIImageView *uiRating;
+    IBOutlet UITableViewCell *uiCell;
+    
+    BOOL commentsLoaded;
+    BOOL scrollToEnd;
+    
+    BOOL signedIn;
 }
 
 @property (nonatomic, retain) TalkDetailModel *talk;

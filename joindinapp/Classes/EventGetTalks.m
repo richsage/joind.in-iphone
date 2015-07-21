@@ -20,78 +20,78 @@
 @synthesize event;
 
 - (void)call:(EventDetailModel *)_event {
-	self.event = _event;
+    self.event = _event;
     [self callAPI:_event.talksURI params:[NSDictionary dictionaryWithObject:[[NSNumber alloc] initWithInt:200] forKey:@"resultsperpage"] needAuth:YES];
 }
 
 - (void)gotData:(NSObject *)obj {
-	TalkListModel *tlm = [[[TalkListModel alloc] initWithEvent:self.event] autorelease];
-	
-	NSDictionary *d = [(NSDictionary *)obj objectForKey:@"talks"];
-	for (NSDictionary *talk in d) {
-		TalkDetailModel *tdm = [[TalkDetailModel alloc] init];
-		
-		if ([[talk objectForKey:@"talk_title"] isKindOfClass:[NSString class]]) {
-			tdm.title         = [talk objectForKey:@"talk_title"];
-		} else {
-			tdm.title         = @"";
-		}
-		//NSLog(@"Speaker is a %@", [[talk objectForKey:@"speaker"] objectForKey:@"speaker_name"]);
-		if ([[talk objectForKey:@"speakers"] isKindOfClass:[NSArray class]]) {
+    TalkListModel *tlm = [[[TalkListModel alloc] initWithEvent:self.event] autorelease];
+    
+    NSDictionary *d = [(NSDictionary *)obj objectForKey:@"talks"];
+    for (NSDictionary *talk in d) {
+        TalkDetailModel *tdm = [[TalkDetailModel alloc] init];
+        
+        if ([[talk objectForKey:@"talk_title"] isKindOfClass:[NSString class]]) {
+            tdm.title         = [talk objectForKey:@"talk_title"];
+        } else {
+            tdm.title         = @"";
+        }
+        //NSLog(@"Speaker is a %@", [[talk objectForKey:@"speaker"] objectForKey:@"speaker_name"]);
+        if ([[talk objectForKey:@"speakers"] isKindOfClass:[NSArray class]]) {
             tdm.speakers = [talk objectForKey:@"speakers"];
         } else {
             tdm.speakers = [[NSArray alloc] init];
         }
-		
-		if ([[talk objectForKey:@"start_date"] isKindOfClass:[NSString class]]) {
+        
+        if ([[talk objectForKey:@"start_date"] isKindOfClass:[NSString class]]) {
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
             [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];
             tdm.startDate = [dateFormatter dateFromString:[talk objectForKey:@"start_date"]];
-		} else {
-			tdm.startDate         = nil;
-		}
-		
-		if ([[talk objectForKey:@"talk_description"] isKindOfClass:[NSString class]]) {
-			tdm.description          = [talk objectForKey:@"talk_description"];
-		} else {
-			tdm.description          = @"";
-		}
-		
-		if ([[talk objectForKey:@"comment_count"] isKindOfClass:[NSNumber class]]) {
-			tdm.commentCount   = [[talk objectForKey:@"comment_count"] integerValue];
-		} else {
-			tdm.commentCount   = 0;
-		}
-		
-		if ([[talk objectForKey:@"comments_enabled"] isKindOfClass:[NSNumber class]]) {
-			tdm.allowComments = [[talk objectForKey:@"comments_enabled"] boolValue];
-		} else {
-			tdm.allowComments = NO;
-		}
-		
-		if ([[talk objectForKey:@"average_rating"] isKindOfClass:[NSNumber class]]) {
-			tdm.rating = [[talk objectForKey:@"average_rating"] integerValue];
-		} else {
-			tdm.rating = 0;
-		}
-		
-		if ([[talk objectForKey:@"tracks"] isKindOfClass:[NSArray class]]) {
-			NSArray *tks = [talk objectForKey:@"tracks"];
-			TrackDetailModel *tkdm;
-			for (NSDictionary *tk in tks) {
-				tkdm = [[TrackDetailModel alloc] init];
-				
-				if ([[tk objectForKey:@"track_name"] isKindOfClass:[NSString class]]) {
-					tkdm.name = [tk objectForKey:@"track_name"];
-				} else {
-					tkdm.name = @"";
-				}
-								
-				[tdm.tracks addTrack:tkdm];
-				[tkdm release];
-			}
-		}
-		
+        } else {
+            tdm.startDate         = nil;
+        }
+        
+        if ([[talk objectForKey:@"talk_description"] isKindOfClass:[NSString class]]) {
+            tdm.description          = [talk objectForKey:@"talk_description"];
+        } else {
+            tdm.description          = @"";
+        }
+        
+        if ([[talk objectForKey:@"comment_count"] isKindOfClass:[NSNumber class]]) {
+            tdm.commentCount   = [[talk objectForKey:@"comment_count"] integerValue];
+        } else {
+            tdm.commentCount   = 0;
+        }
+        
+        if ([[talk objectForKey:@"comments_enabled"] isKindOfClass:[NSNumber class]]) {
+            tdm.allowComments = [[talk objectForKey:@"comments_enabled"] boolValue];
+        } else {
+            tdm.allowComments = NO;
+        }
+        
+        if ([[talk objectForKey:@"average_rating"] isKindOfClass:[NSNumber class]]) {
+            tdm.rating = [[talk objectForKey:@"average_rating"] integerValue];
+        } else {
+            tdm.rating = 0;
+        }
+        
+        if ([[talk objectForKey:@"tracks"] isKindOfClass:[NSArray class]]) {
+            NSArray *tks = [talk objectForKey:@"tracks"];
+            TrackDetailModel *tkdm;
+            for (NSDictionary *tk in tks) {
+                tkdm = [[TrackDetailModel alloc] init];
+                
+                if ([[tk objectForKey:@"track_name"] isKindOfClass:[NSString class]]) {
+                    tkdm.name = [tk objectForKey:@"track_name"];
+                } else {
+                    tkdm.name = @"";
+                }
+                                
+                [tdm.tracks addTrack:tkdm];
+                [tkdm release];
+            }
+        }
+        
         if ([[talk objectForKey:@"uri"] isKindOfClass:[NSString class]]) {
             tdm.uri         = [talk objectForKey:@"uri"];
         } else {
@@ -129,27 +129,27 @@
         }
 
         [tlm addTalk:tdm];
-		[tdm release];
-		
-	}
-	[tlm sort];
-	[self.delegate gotTalksForEvent:tlm error:nil];
+        [tdm release];
+        
+    }
+    [tlm sort];
+    [self.delegate gotTalksForEvent:tlm error:nil];
 }
 
 - (void)gotError:(APIError *)error {
-	[self.delegate gotTalksForEvent:nil error:error];
+    [self.delegate gotTalksForEvent:nil error:error];
 }
-	
+    
 @end
 
 @implementation APICaller (APICaller_EventGetTalks)
 + (EventGetTalks *)EventGetTalks:(id)_delegate {
-	static EventGetTalks *e = nil;
-	if (e != nil) {
-		[e cancel];
-		[e release];
-	}
-	e = [[EventGetTalks alloc] initWithDelegate:_delegate];
-	return e;
+    static EventGetTalks *e = nil;
+    if (e != nil) {
+        [e cancel];
+        [e release];
+    }
+    e = [[EventGetTalks alloc] initWithDelegate:_delegate];
+    return e;
 }
 @end

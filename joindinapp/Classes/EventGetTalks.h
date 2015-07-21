@@ -16,7 +16,7 @@
 #import "TalkListModel.h"
 
 @interface EventGetTalks : APICaller {
-	EventDetailModel *event;
+    EventDetailModel *event;
 }
 
 @property (nonatomic, retain) EventDetailModel *event;

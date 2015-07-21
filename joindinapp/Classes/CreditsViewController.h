@@ -15,7 +15,7 @@
 
 
 @interface CreditsViewController : UIViewController {
-	IBOutlet UIWebView *uiContent;
+    IBOutlet UIWebView *uiContent;
 }
 
 @property (nonatomic, retain) UIWebView *uiContent;

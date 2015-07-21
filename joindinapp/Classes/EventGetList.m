@@ -19,179 +19,179 @@
 @implementation EventGetList
 
 - (void)call:(NSString *)eventType {
-	[self callAPI:@"events" params:[NSDictionary dictionaryWithObject:eventType forKey:@"filter"] needAuth:YES];
+    [self callAPI:@"events" params:[NSDictionary dictionaryWithObject:eventType forKey:@"filter"] needAuth:YES];
 }
 
 - (void)gotData:(NSObject *)obj {
-	
-	NSDictionary *d = (NSDictionary *)obj;
+    
+    NSDictionary *d = (NSDictionary *)obj;
     NSDictionary *events = (NSDictionary *)[d objectForKey:@"events"];
-	
-	EventListModel *elm = [[[EventListModel alloc] init] autorelease];
-	
-	
-	for (NSDictionary *event in events) {
-		
-		//NSLog(@"Event is %@", event);
-		EventDetailModel *edm = [[EventDetailModel alloc] init];
-		
-		if ([[event objectForKey:@"name"] isKindOfClass:[NSString class]]) {
-			edm.name = [event objectForKey:@"name"];
-		} else {
-			edm.name = @"";
-		}
-		
-		if ([[event objectForKey:@"start_date"] isKindOfClass:[NSString class]]) {
-			NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-			[dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];
-			edm.startDate = [dateFormatter dateFromString:[event objectForKey:@"start_date"]];
-		} else {
-			edm.startDate = nil;
-		}
-		
-		if ([[event objectForKey:@"end_date"] isKindOfClass:[NSString class]]) {
-			NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-			[dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];
-			edm.endDate = [dateFormatter dateFromString:[event objectForKey:@"end_date"]];
-		} else {
-			edm.endDate = nil;
-		}
-		
-		if ([[event objectForKey:@"location"] isKindOfClass:[NSString class]]) {
-			edm.location = [event objectForKey:@"location"];
-		} else {
-			edm.location = @"";
-		}
-		
-		if ([[event objectForKey:@"description"] isKindOfClass:[NSString class]]) {
-			edm.description = [event objectForKey:@"description"];
-		} else {
-			edm.description = @"";
-		}
-		
-		if ([[event objectForKey:@"stub"] isKindOfClass:[NSString class]]) {
-			edm.stub    = [event objectForKey:@"stub"];
-		} else {
-			edm.stub    = @"";
-		}
-		
-		if ([[event objectForKey:@"tz_continent"] isKindOfClass:[NSString class]]) {
-			edm.tzContinent  = [event objectForKey:@"tz_continent"];
-		} else {
-			edm.tzContinent  = @"";
-		}
-		
-		if ([[event objectForKey:@"tz_place"] isKindOfClass:[NSString class]]) {
-			edm.tzPlace = [event objectForKey:@"tz_place"];
-		} else {
-			edm.tzPlace = @"";
-		}
-		
-		if ([[event objectForKey:@"icon"] isKindOfClass:[NSString class]]) {
-			edm.icon    = [event objectForKey:@"icon"];
-		} else {
-			edm.icon    = @"none.gif";
-		}
-		
-		if ([[event objectForKey:@"hashtag"] isKindOfClass:[NSString class]]) {
-			edm.hashtag = [event objectForKey:@"hashtag"];
-		} else {
-			edm.hashtag = nil;
-		}
+    
+    EventListModel *elm = [[[EventListModel alloc] init] autorelease];
+    
+    
+    for (NSDictionary *event in events) {
+        
+        //NSLog(@"Event is %@", event);
+        EventDetailModel *edm = [[EventDetailModel alloc] init];
+        
+        if ([[event objectForKey:@"name"] isKindOfClass:[NSString class]]) {
+            edm.name = [event objectForKey:@"name"];
+        } else {
+            edm.name = @"";
+        }
+        
+        if ([[event objectForKey:@"start_date"] isKindOfClass:[NSString class]]) {
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];
+            edm.startDate = [dateFormatter dateFromString:[event objectForKey:@"start_date"]];
+        } else {
+            edm.startDate = nil;
+        }
+        
+        if ([[event objectForKey:@"end_date"] isKindOfClass:[NSString class]]) {
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];
+            edm.endDate = [dateFormatter dateFromString:[event objectForKey:@"end_date"]];
+        } else {
+            edm.endDate = nil;
+        }
+        
+        if ([[event objectForKey:@"location"] isKindOfClass:[NSString class]]) {
+            edm.location = [event objectForKey:@"location"];
+        } else {
+            edm.location = @"";
+        }
+        
+        if ([[event objectForKey:@"description"] isKindOfClass:[NSString class]]) {
+            edm.description = [event objectForKey:@"description"];
+        } else {
+            edm.description = @"";
+        }
+        
+        if ([[event objectForKey:@"stub"] isKindOfClass:[NSString class]]) {
+            edm.stub    = [event objectForKey:@"stub"];
+        } else {
+            edm.stub    = @"";
+        }
+        
+        if ([[event objectForKey:@"tz_continent"] isKindOfClass:[NSString class]]) {
+            edm.tzContinent  = [event objectForKey:@"tz_continent"];
+        } else {
+            edm.tzContinent  = @"";
+        }
+        
+        if ([[event objectForKey:@"tz_place"] isKindOfClass:[NSString class]]) {
+            edm.tzPlace = [event objectForKey:@"tz_place"];
+        } else {
+            edm.tzPlace = @"";
+        }
+        
+        if ([[event objectForKey:@"icon"] isKindOfClass:[NSString class]]) {
+            edm.icon    = [event objectForKey:@"icon"];
+        } else {
+            edm.icon    = @"none.gif";
+        }
+        
+        if ([[event objectForKey:@"hashtag"] isKindOfClass:[NSString class]]) {
+            edm.hashtag = [event objectForKey:@"hashtag"];
+        } else {
+            edm.hashtag = nil;
+        }
 
-		if ([[event objectForKey:@"cfp_start_date"] isKindOfClass:[NSString class]]) {
-			edm.cfpStartDate = [NSDate dateWithTimeIntervalSince1970:[[event objectForKey:@"cfp_start_date"] integerValue]];
+        if ([[event objectForKey:@"cfp_start_date"] isKindOfClass:[NSString class]]) {
+            edm.cfpStartDate = [NSDate dateWithTimeIntervalSince1970:[[event objectForKey:@"cfp_start_date"] integerValue]];
         } else {
             edm.cfpStartDate  = nil;
         }
 
         if ([[event objectForKey:@"cfp_end_date"] isKindOfClass:[NSString class]]) {
-			edm.cfpEndDate  = [NSDate dateWithTimeIntervalSince1970:[[event objectForKey:@"cfp_end_date"] integerValue]];
-		} else {
-			edm.cfpEndDate  = nil;
-		}
-		
-		if ([[event objectForKey:@"comments_enabled"] isKindOfClass:[NSNumber class]]) {
-			edm.commentsEnabled = ([[event objectForKey:@"comments_enabled"] integerValue] == 1);
-		} else {
-			edm.commentsEnabled = NO;
-		}
-		
-		if ([[event objectForKey:@"attendee_count"] isKindOfClass:[NSNumber class]]) {
-			edm.attendeeCount   = [[event objectForKey:@"attendee_count"] integerValue];
-		} else {
-			edm.attendeeCount   = 0;
-		}
-		
-		if ([[event objectForKey:@"event_comments_count"] isKindOfClass:[NSNumber class]]) {
-			edm.eventCommentsCount = [[event objectForKey:@"event_comments_count"] integerValue];
-		} else {
-			edm.eventCommentsCount = 0;
-		}
-
-		// URIs
-		if ([[event objectForKey:@"uri"] isKindOfClass:[NSString class]]) {
-			edm.uri     = [event objectForKey:@"uri"];
-		} else {
-			edm.uri     = nil;
-		}
-		if ([[event objectForKey:@"verbose_uri"] isKindOfClass:[NSString class]]) {
-			edm.verboseURI = [event objectForKey:@"verbose_uri"];
-		} else {
-			edm.verboseURI = nil;
-		}
-		if ([[event objectForKey:@"comments_uri"] isKindOfClass:[NSString class]]) {
-			edm.commentsURI = [event objectForKey:@"comments_uri"];
-		} else {
-			edm.commentsURI = nil;
-		}
-		if ([[event objectForKey:@"talks_uri"] isKindOfClass:[NSString class]]) {
-			edm.talksURI = [event objectForKey:@"talks_uri"];
-		} else {
-			edm.talksURI = nil;
-		}
-		if ([[event objectForKey:@"tracks_uri"] isKindOfClass:[NSString class]]) {
-			edm.tracksURI = [event objectForKey:@"tracks_uri"];
-		} else {
-			edm.tracksURI = nil;
-		}
-		if ([[event objectForKey:@"attending_uri"] isKindOfClass:[NSString class]]) {
-			edm.attendingURI = [event objectForKey:@"attending_uri"];
-		} else {
-			edm.attendingURI = nil;
-		}
-		if ([[event objectForKey:@"website_uri"] isKindOfClass:[NSString class]]) {
-			edm.websiteURI = [event objectForKey:@"website_uri"];
-		} else {
-			edm.websiteURI = nil;
-		}
-		if ([[event objectForKey:@"humane_website_uri"] isKindOfClass:[NSString class]]) {
-			edm.humaneWebsiteURI = [event objectForKey:@"humane_website_uri"];
-		} else {
-			edm.humaneWebsiteURI = nil;
-		}
-		if ([[event objectForKey:@"attendees_uri"] isKindOfClass:[NSString class]]) {
-			edm.attendeesURI = [event objectForKey:@"attendees_uri"];
-		} else {
-			edm.attendeesURI = nil;
+            edm.cfpEndDate  = [NSDate dateWithTimeIntervalSince1970:[[event objectForKey:@"cfp_end_date"] integerValue]];
+        } else {
+            edm.cfpEndDate  = nil;
         }
         
-		// Attending?
-		edm.attending  = [[event objectForKey:@"attending"] boolValue];
+        if ([[event objectForKey:@"comments_enabled"] isKindOfClass:[NSNumber class]]) {
+            edm.commentsEnabled = ([[event objectForKey:@"comments_enabled"] integerValue] == 1);
+        } else {
+            edm.commentsEnabled = NO;
+        }
+        
+        if ([[event objectForKey:@"attendee_count"] isKindOfClass:[NSNumber class]]) {
+            edm.attendeeCount   = [[event objectForKey:@"attendee_count"] integerValue];
+        } else {
+            edm.attendeeCount   = 0;
+        }
+        
+        if ([[event objectForKey:@"event_comments_count"] isKindOfClass:[NSNumber class]]) {
+            edm.eventCommentsCount = [[event objectForKey:@"event_comments_count"] integerValue];
+        } else {
+            edm.eventCommentsCount = 0;
+        }
 
-		[elm addEvent:edm];
-		
-		[edm release];
-	}
-	
-	//[elm sort];
-	
-	[self.delegate gotEventListData:elm error:nil];
-	
+        // URIs
+        if ([[event objectForKey:@"uri"] isKindOfClass:[NSString class]]) {
+            edm.uri     = [event objectForKey:@"uri"];
+        } else {
+            edm.uri     = nil;
+        }
+        if ([[event objectForKey:@"verbose_uri"] isKindOfClass:[NSString class]]) {
+            edm.verboseURI = [event objectForKey:@"verbose_uri"];
+        } else {
+            edm.verboseURI = nil;
+        }
+        if ([[event objectForKey:@"comments_uri"] isKindOfClass:[NSString class]]) {
+            edm.commentsURI = [event objectForKey:@"comments_uri"];
+        } else {
+            edm.commentsURI = nil;
+        }
+        if ([[event objectForKey:@"talks_uri"] isKindOfClass:[NSString class]]) {
+            edm.talksURI = [event objectForKey:@"talks_uri"];
+        } else {
+            edm.talksURI = nil;
+        }
+        if ([[event objectForKey:@"tracks_uri"] isKindOfClass:[NSString class]]) {
+            edm.tracksURI = [event objectForKey:@"tracks_uri"];
+        } else {
+            edm.tracksURI = nil;
+        }
+        if ([[event objectForKey:@"attending_uri"] isKindOfClass:[NSString class]]) {
+            edm.attendingURI = [event objectForKey:@"attending_uri"];
+        } else {
+            edm.attendingURI = nil;
+        }
+        if ([[event objectForKey:@"website_uri"] isKindOfClass:[NSString class]]) {
+            edm.websiteURI = [event objectForKey:@"website_uri"];
+        } else {
+            edm.websiteURI = nil;
+        }
+        if ([[event objectForKey:@"humane_website_uri"] isKindOfClass:[NSString class]]) {
+            edm.humaneWebsiteURI = [event objectForKey:@"humane_website_uri"];
+        } else {
+            edm.humaneWebsiteURI = nil;
+        }
+        if ([[event objectForKey:@"attendees_uri"] isKindOfClass:[NSString class]]) {
+            edm.attendeesURI = [event objectForKey:@"attendees_uri"];
+        } else {
+            edm.attendeesURI = nil;
+        }
+        
+        // Attending?
+        edm.attending  = [[event objectForKey:@"attending"] boolValue];
+
+        [elm addEvent:edm];
+        
+        [edm release];
+    }
+    
+    //[elm sort];
+    
+    [self.delegate gotEventListData:elm error:nil];
+    
 }
 
 - (void)gotError:(APIError *)error {
-	[self.delegate gotEventListData:nil error:error];
+    [self.delegate gotEventListData:nil error:error];
 }
 
 
@@ -199,12 +199,12 @@
 
 @implementation APICaller (APICaller_EventGetList)
 + (EventGetList *)EventGetList:(id)_delegate {
-	static EventGetList *e = nil;
-	if (e != nil) {
-		[e cancel];
-		[e release];
-	}	
-	e = [[EventGetList alloc] initWithDelegate:_delegate];
-	return e;
+    static EventGetList *e = nil;
+    if (e != nil) {
+        [e cancel];
+        [e release];
+    }   
+    e = [[EventGetList alloc] initWithDelegate:_delegate];
+    return e;
 }
 @end

@@ -16,8 +16,8 @@
 
 
 @interface EventMapAnnotation : NSObject <MKAnnotation> {
-	CLLocationCoordinate2D coordinate;
-	NSString *title;
+    CLLocationCoordinate2D coordinate;
+    NSString *title;
 }
 
 -(id) initWithCoordinate:(CLLocationCoordinate2D)coordinate title:(NSString*)title;

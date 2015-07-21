@@ -21,8 +21,8 @@
 }
 
 - (void)gotData:(NSObject *)obj {
-	
-	UserDetailModel *udm = [[[UserDetailModel alloc] init] autorelease];
+    
+    UserDetailModel *udm = [[[UserDetailModel alloc] init] autorelease];
 
     NSDictionary *user = [(NSArray *)[(NSDictionary *)obj objectForKey:@"users"] objectAtIndex:0];
     if ([[user objectForKey:@"username"] isKindOfClass:[NSString class]]) {
@@ -91,23 +91,23 @@
         udm.talkCommentsURI = @"";
     }
 
-	[self.delegate gotUserGetDetailData:udm error:nil];
+    [self.delegate gotUserGetDetailData:udm error:nil];
 }
 
 - (void)gotError:(APIError *)error {
-	[self.delegate gotUserGetDetailData:nil error:error];
+    [self.delegate gotUserGetDetailData:nil error:error];
 }
 
 @end
 
 @implementation APICaller (APICaller_UserGetDetail)
 + (UserGetDetail *)UserGetDetail:(id)_delegate {
-	static UserGetDetail *u = nil;
-	if (u != nil) {
-		[u cancel];
-		[u release];
-	}	
-	u = [[UserGetDetail alloc] initWithDelegate:_delegate];
-	return u;
+    static UserGetDetail *u = nil;
+    if (u != nil) {
+        [u cancel];
+        [u release];
+    }   
+    u = [[UserGetDetail alloc] initWithDelegate:_delegate];
+    return u;
 }
 @end

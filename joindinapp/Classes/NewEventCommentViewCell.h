@@ -15,10 +15,10 @@
 
 
 @interface NewEventCommentViewCell : UITableViewCell {
-	IBOutlet UIButton *uiSubmit;
-	IBOutlet UITextView *uiComment;
-	IBOutlet UIActivityIndicatorView *uiActivity;
-	id EventCommentDelegate;
+    IBOutlet UIButton *uiSubmit;
+    IBOutlet UITextView *uiComment;
+    IBOutlet UIActivityIndicatorView *uiActivity;
+    id EventCommentDelegate;
 }
 
 @property (nonatomic, retain) UIButton *uiSubmit;

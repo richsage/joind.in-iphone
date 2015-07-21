@@ -16,11 +16,11 @@
 #import "EventDetailModel.h"
 
 @interface TalkListModel : NSObject {
-	NSMutableArray *talks;
-	NSMutableDictionary *talksByDate;
-	EventDetailModel *event;
-	NSMutableArray *talksNow;
-	NSMutableArray *talksNext;
+    NSMutableArray *talks;
+    NSMutableDictionary *talksByDate;
+    EventDetailModel *event;
+    NSMutableArray *talksNow;
+    NSMutableArray *talksNext;
 }
 
 @property(nonatomic, retain) NSMutableArray *talks;

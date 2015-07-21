@@ -16,11 +16,11 @@
 #import "EventDetailModel.h"
 
 @interface EventLocationViewController : UIViewController <MKMapViewDelegate> {
-	IBOutlet MKMapView *uiMap;
-	IBOutlet UISegmentedControl *uiMapType;
-	IBOutlet UIButton *uiShowMe;
-	IBOutlet UIButton *uiShowEvent;
-	EventDetailModel *event;
+    IBOutlet MKMapView *uiMap;
+    IBOutlet UISegmentedControl *uiMapType;
+    IBOutlet UIButton *uiShowMe;
+    IBOutlet UIButton *uiShowEvent;
+    EventDetailModel *event;
 }
 
 - (void)initMap;

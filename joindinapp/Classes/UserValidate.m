@@ -18,40 +18,40 @@
 @implementation UserValidate
 
 - (void)call:(NSString *)user password:(NSString *)pass {
-	// Get OAuth details from application settings
-	NSString *oauthClientID = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"joindInOAuthClientID"];
-	NSString *oauthClientSecret = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"joindInOAuthClientSecret"];
+    // Get OAuth details from application settings
+    NSString *oauthClientID = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"joindInOAuthClientID"];
+    NSString *oauthClientSecret = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"joindInOAuthClientSecret"];
 
-	NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:5];
-	[params setValue:user       forKey:@"username"];
-	[params setValue:pass       forKey:@"password"];
-	[params setValue:@"password" forKey:@"grant_type"];
-	[params setValue:oauthClientID forKey:@"client_id"];
-	[params setValue:oauthClientSecret forKey:@"client_secret"];
-	[self callAPI:@"token" method:@"POST" params:params needAuth:NO canCache:NO];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:5];
+    [params setValue:user       forKey:@"username"];
+    [params setValue:pass       forKey:@"password"];
+    [params setValue:@"password" forKey:@"grant_type"];
+    [params setValue:oauthClientID forKey:@"client_id"];
+    [params setValue:oauthClientSecret forKey:@"client_secret"];
+    [self callAPI:@"token" method:@"POST" params:params needAuth:NO canCache:NO];
 }
 
 - (void)gotData:(NSObject *)obj {
-	// Successful response (ie non-400/500 error)
-	NSDictionary *response = (NSDictionary *)obj;
-	[self.delegate gotUserValidateData:YES error:nil data:response];
+    // Successful response (ie non-400/500 error)
+    NSDictionary *response = (NSDictionary *)obj;
+    [self.delegate gotUserValidateData:YES error:nil data:response];
 }
 
 - (void)gotError:(NSObject *)error {
-	// Error response
-	[self.delegate gotUserValidateData:NO error:nil data:nil];
+    // Error response
+    [self.delegate gotUserValidateData:NO error:nil data:nil];
 }
 
 @end
 
 @implementation APICaller (APICaller_UserValidate)
 + (UserValidate *)UserValidate:(id)_delegate {
-	static UserValidate *u = nil;
-	if (u != nil) {
-		[u cancel];
-		[u release];
-	}	
-	u = [[UserValidate alloc] initWithDelegate:_delegate];
-	return u;
+    static UserValidate *u = nil;
+    if (u != nil) {
+        [u cancel];
+        [u release];
+    }   
+    u = [[UserValidate alloc] initWithDelegate:_delegate];
+    return u;
 }
 @end

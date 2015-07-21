@@ -15,10 +15,10 @@
 
 
 @interface TrackDetailModel : NSObject {
-	NSString   *name;
-	NSString   *desc;
-	NSString   *color;
-	NSUInteger  Id;
+    NSString   *name;
+    NSString   *desc;
+    NSString   *color;
+    NSUInteger  Id;
 }
 
 @property (nonatomic, retain) NSString   *name;

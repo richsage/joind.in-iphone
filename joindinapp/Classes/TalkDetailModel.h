@@ -16,30 +16,30 @@
 #import "TracksListModel.h"
 
 @interface TalkDetailModel : NSObject {
-	NSString   *title;      // talk_title
-	NSString   *urlFriendlyTalkTitle;      // url_friendly_talk_title
-	NSString   *description;       // talk_description
-	NSString   *type;       // type
-	NSString   *slidesLink; // slides_link
-	NSString   *lang;       // language
-	NSDate     *startDate; // start_date
-	NSUInteger  duration; // duration
-	NSString   *stub; // stub
-	NSUInteger  rating; // average_rating
-	BOOL        allowComments; // comments_enabled
-	NSUInteger  commentCount; // comment_count
-	BOOL        starred; // starred
-	NSUInteger  starredCount; // starred_count
-	TracksListModel *tracks; // tracks (array)
-	NSArray    *speakers;    // speakers (array)
+    NSString   *title;      // talk_title
+    NSString   *urlFriendlyTalkTitle;      // url_friendly_talk_title
+    NSString   *description;       // talk_description
+    NSString   *type;       // type
+    NSString   *slidesLink; // slides_link
+    NSString   *lang;       // language
+    NSDate     *startDate; // start_date
+    NSUInteger  duration; // duration
+    NSString   *stub; // stub
+    NSUInteger  rating; // average_rating
+    BOOL        allowComments; // comments_enabled
+    NSUInteger  commentCount; // comment_count
+    BOOL        starred; // starred
+    NSUInteger  starredCount; // starred_count
+    TracksListModel *tracks; // tracks (array)
+    NSArray    *speakers;    // speakers (array)
 
-	NSString   *uri;
-	NSString   *verboseURI;
-	NSString   *websiteURI;
-	NSString   *commentsURI;
-	NSString   *starredURI;
-	NSString   *verboseCommentsURI;
-	NSString   *eventURI;
+    NSString   *uri;
+    NSString   *verboseURI;
+    NSString   *websiteURI;
+    NSString   *commentsURI;
+    NSString   *starredURI;
+    NSString   *verboseCommentsURI;
+    NSString   *eventURI;
 }
 
 @property (nonatomic, retain) NSString   *title;

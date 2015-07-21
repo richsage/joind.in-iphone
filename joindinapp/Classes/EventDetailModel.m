@@ -52,19 +52,19 @@
 
 
 -(id)init {
-	return self;
+    return self;
 }
 
 -(BOOL)isNowOn {
-	return ([self hasStarted] && ![self hasFinished]);
+    return ([self hasStarted] && ![self hasFinished]);
 }
 
 -(BOOL)hasFinished {
-	return ([self.endDate compare:[NSDate date]] == NSOrderedAscending);
+    return ([self.endDate compare:[NSDate date]] == NSOrderedAscending);
 }
 
 -(BOOL)hasStarted {
-	return ([self.startDate compare:[NSDate date]] == NSOrderedAscending);
+    return ([self.startDate compare:[NSDate date]] == NSOrderedAscending);
 }
 
 -(BOOL)postEventTimeLimitReached {
@@ -79,11 +79,11 @@
 }
 
 -(NSComparisonResult)comparator:(EventDetailModel *)otherModel {
-	return [self.startDate compare:otherModel.startDate];
+    return [self.startDate compare:otherModel.startDate];
 }
 
 -(BOOL)hasTracks {
-	return (self.tracksCount > 0);
+    return (self.tracksCount > 0);
 }
 
 @end

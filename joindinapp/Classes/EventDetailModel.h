@@ -15,42 +15,42 @@
 #import "TracksListModel.h"
 
 @interface EventDetailModel : NSObject {
-	NSString   *name;
-	NSDate     *startDate;
-	NSDate     *endDate;
-	NSString   *location;
-	NSString   *description;
-	NSString   *stub;
-	NSString   *tzContinent;
-	NSString   *tzPlace;
-	NSString   *icon;
-	NSString   *hashtag;
-	NSString   *href;
-	NSDate     *cfpStartDate;
-	NSDate     *cfpEndDate;
-	NSString   *cfpURL;
-	NSUInteger  attendeeCount;
-	NSUInteger  eventCommentsCount;
-	NSUInteger  tracksCount;
-	NSUInteger  talksCount;
-	NSUInteger  talkCommentsCount;
-	BOOL        commentsEnabled;
-	float       latitude;
-	float       longitude;
+    NSString   *name;
+    NSDate     *startDate;
+    NSDate     *endDate;
+    NSString   *location;
+    NSString   *description;
+    NSString   *stub;
+    NSString   *tzContinent;
+    NSString   *tzPlace;
+    NSString   *icon;
+    NSString   *hashtag;
+    NSString   *href;
+    NSDate     *cfpStartDate;
+    NSDate     *cfpEndDate;
+    NSString   *cfpURL;
+    NSUInteger  attendeeCount;
+    NSUInteger  eventCommentsCount;
+    NSUInteger  tracksCount;
+    NSUInteger  talksCount;
+    NSUInteger  talkCommentsCount;
+    BOOL        commentsEnabled;
+    float       latitude;
+    float       longitude;
 
-	NSString    *uri;
-	NSString    *verboseURI;
-	NSString    *commentsURI;
-	NSString    *talksURI;
-	NSString    *tracksURI;
-	NSString    *attendingURI;
-	NSString    *websiteURI;
-	NSString    *humaneWebsiteURI;
-	NSString    *allTalkCommentsURI;
-	NSString    *attendeesURI;
+    NSString    *uri;
+    NSString    *verboseURI;
+    NSString    *commentsURI;
+    NSString    *talksURI;
+    NSString    *tracksURI;
+    NSString    *attendingURI;
+    NSString    *websiteURI;
+    NSString    *humaneWebsiteURI;
+    NSString    *allTalkCommentsURI;
+    NSString    *attendeesURI;
 
-	// Auth'd user details
-	BOOL        attending;
+    // Auth'd user details
+    BOOL        attending;
 
 }
 

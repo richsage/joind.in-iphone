@@ -15,7 +15,7 @@
 
 
 @interface AboutViewController : UIViewController {
-	IBOutlet UILabel *uiVersion;
+    IBOutlet UILabel *uiVersion;
 }
 
 @property (nonatomic, retain) UILabel *uiVersion;

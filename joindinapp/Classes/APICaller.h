@@ -17,12 +17,12 @@
 #define CACHE_TIME 7*86400 // In seconds
 
 @interface APICaller : NSObject {
-	id delegate;
-	NSMutableData *urlData;
-	NSURLConnection *connection;
-	NSString *reqJSON;
-	NSMutableString *url;
-	int lastStatusCode;
+    id delegate;
+    NSMutableData *urlData;
+    NSURLConnection *connection;
+    NSString *reqJSON;
+    NSMutableString *url;
+    int lastStatusCode;
 }
 
 @property (nonatomic, retain) id delegate;

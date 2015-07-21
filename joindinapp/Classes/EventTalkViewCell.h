@@ -15,14 +15,14 @@
 
 
 @interface EventTalkViewCell : UITableViewCell {
-	IBOutlet UIButton    *uiDetail;
-	IBOutlet UILabel     *uiTalkName;
-	IBOutlet UILabel     *uiSpeaker;
-	IBOutlet UIImageView *uiRating;
-	IBOutlet UILabel     *uiNumComments;
-	IBOutlet UIImageView *uiCommentBubble;
-	IBOutlet UIImageView *uiTalkType;
-	IBOutlet UILabel     *uiTime;
+    IBOutlet UIButton    *uiDetail;
+    IBOutlet UILabel     *uiTalkName;
+    IBOutlet UILabel     *uiSpeaker;
+    IBOutlet UIImageView *uiRating;
+    IBOutlet UILabel     *uiNumComments;
+    IBOutlet UIImageView *uiCommentBubble;
+    IBOutlet UIImageView *uiTalkType;
+    IBOutlet UILabel     *uiTime;
 }
 
 @property (nonatomic,retain) UIButton    *uiDetail;

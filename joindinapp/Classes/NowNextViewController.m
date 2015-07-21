@@ -45,9 +45,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-	self.title = self.event.name;
-	UserGetComments *u = [APICaller UserGetComments:self];
-	[u call:nil];
+    self.title = self.event.name;
+    UserGetComments *u = [APICaller UserGetComments:self];
+    [u call:nil];
 }
 
 /*
@@ -57,12 +57,12 @@
 */
 /*
 - (void)viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
+    [super viewWillDisappear:animated];
 }
 */
 /*
 - (void)viewDidDisappear:(BOOL)animated {
-	[super viewDidDisappear:animated];
+    [super viewDidDisappear:animated];
 }
 */
 
@@ -75,15 +75,15 @@
 */
 
 - (void)didReceiveMemoryWarning {
-	// Releases the view if it doesn't have a superview.
+    // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-	
-	// Release any cached data, images, etc that aren't in use.
+    
+    // Release any cached data, images, etc that aren't in use.
 }
 
 - (void)viewDidUnload {
-	// Release any retained subviews of the main view.
-	// e.g. self.myOutlet = nil;
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
 }
 
 
@@ -96,143 +96,143 @@
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	if (section == 0) {
-		// Now
-		return [self.talks.talksNow count];
-	} else {
-		// Next
-		return [self.talks.talksNext count];
-	}
+    if (section == 0) {
+        // Now
+        return [self.talks.talksNow count];
+    } else {
+        // Next
+        return [self.talks.talksNext count];
+    }
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-	if (section == 0) {
-		return @"Now";
-	} else {
-		return @"Next";
-	}
+    if (section == 0) {
+        return @"Now";
+    } else {
+        return @"Next";
+    }
 }
 
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	
+    
     TalkDetailModel *tdm;
-	// Get relevant talk on relevant date
-	if ([indexPath section] == 0) {
-		tdm = [self.talks.talksNow objectAtIndex:[indexPath row]];
-	} else {
-		tdm = [self.talks.talksNext objectAtIndex:[indexPath row]];
-	}
-	
-	if ([self.event hasTracks]) {
-		
-		static NSString *CellIdentifier = @"EventTalkViewCellWithTrack";
-		
-		EventTalkViewCellWithTrack *cell = (EventTalkViewCellWithTrack *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-		if (cell == nil) {
-			NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"EventTalkCell" owner:nil options:nil];
-			for (id currentObject in topLevelObjects) {
-				if ([currentObject isKindOfClass:[EventTalkViewCellWithTrack class]]) {
-					cell = (EventTalkViewCellWithTrack *)currentObject;
-					break;
-				}
-			}
-		}
-		
-		cell.uiTalkName.text = tdm.title;
-		cell.uiSpeaker.text  = [tdm getPrimarySpeakerString];
-		cell.uiRating.image  = [UIImage imageNamed:[NSString stringWithFormat:@"rating-%d.gif", (int) tdm.rating]];
-		cell.uiNumComments.text = [NSString stringWithFormat:@"%d", (int) tdm.commentCount];
-		
-		cell.uiTime.text     = [tdm getTimeString:self.event];
-		
-		if ([tdm.type isEqualToString:@"Talk"]) {
-			cell.uiTalkType.image  = [UIImage imageNamed:@"talk.gif"];
-		} else if ([tdm.type isEqualToString:@"Keynote"]) {
-			cell.uiTalkType.image  = [UIImage imageNamed:@"keynote.gif"];
-		} else if ([tdm.type isEqualToString:@"Social Event"]) {
-			cell.uiTalkType.image  = [UIImage imageNamed:@"social-event.gif"];
-		} else if ([tdm.type isEqualToString:@"Event Related"]) {
-			cell.uiTalkType.image  = [UIImage imageNamed:@"workshop.gif"];
-		} else {
-			cell.uiTalkType.image  = nil;
-		}
-		
-		UserTalkCommentDetailModel *utcdm = [self.comments getCommentForTalk:tdm];
-		
-		if (utcdm == nil) {
-			cell.uiCommentBubble.image = [UIImage imageNamed:@"icon-comment.gif"];
-		} else {
-			cell.uiCommentBubble.image = [UIImage imageNamed:@"icon-comment-user.gif"];
-		}
-		
-		cell.uiTracks.text = [tdm.tracks getStringTrackList];
-		
-		return cell;
-	} else {
-		static NSString *CellIdentifier = @"EventTalkViewCell";
-		
-		EventTalkViewCell *cell = (EventTalkViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-		if (cell == nil) {
-			NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"EventTalkCell" owner:nil options:nil];
-			for (id currentObject in topLevelObjects) {
-				if ([currentObject isKindOfClass:[EventTalkViewCell class]]) {
-					cell = (EventTalkViewCell *)currentObject;
-					break;
-				}
-			}
-		}
-		
-		cell.uiTalkName.text = tdm.title;
-		cell.uiSpeaker.text  = [tdm getPrimarySpeakerString];
-		cell.uiRating.image  = [UIImage imageNamed:[NSString stringWithFormat:@"rating-%d.gif", (int) tdm.rating]];
-		cell.uiNumComments.text = [NSString stringWithFormat:@"%d", (int) tdm.commentCount];
-		
-		cell.uiTime.text     = [tdm getTimeString:self.event];
-		
-		if ([tdm.type isEqualToString:@"Talk"]) {
-			cell.uiTalkType.image  = [UIImage imageNamed:@"talk.gif"];
-		} else if ([tdm.type isEqualToString:@"Keynote"]) {
-			cell.uiTalkType.image  = [UIImage imageNamed:@"keynote.gif"];
-		} else if ([tdm.type isEqualToString:@"Social Event"]) {
-			cell.uiTalkType.image  = [UIImage imageNamed:@"social-event.gif"];
-		} else if ([tdm.type isEqualToString:@"Event Related"]) {
-			cell.uiTalkType.image  = [UIImage imageNamed:@"workshop.gif"];
-		} else {
-			cell.uiTalkType.image  = nil;
-		}
-		
-		UserTalkCommentDetailModel *utcdm = [self.comments getCommentForTalk:tdm];
-		
-		if (utcdm == nil) {
-			cell.uiCommentBubble.image = [UIImage imageNamed:@"icon-comment.gif"];
-		} else {
-			cell.uiCommentBubble.image = [UIImage imageNamed:@"icon-comment-user.gif"];
-		}
-		
-		return cell;
-	}
+    // Get relevant talk on relevant date
+    if ([indexPath section] == 0) {
+        tdm = [self.talks.talksNow objectAtIndex:[indexPath row]];
+    } else {
+        tdm = [self.talks.talksNext objectAtIndex:[indexPath row]];
+    }
+    
+    if ([self.event hasTracks]) {
+        
+        static NSString *CellIdentifier = @"EventTalkViewCellWithTrack";
+        
+        EventTalkViewCellWithTrack *cell = (EventTalkViewCellWithTrack *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"EventTalkCell" owner:nil options:nil];
+            for (id currentObject in topLevelObjects) {
+                if ([currentObject isKindOfClass:[EventTalkViewCellWithTrack class]]) {
+                    cell = (EventTalkViewCellWithTrack *)currentObject;
+                    break;
+                }
+            }
+        }
+        
+        cell.uiTalkName.text = tdm.title;
+        cell.uiSpeaker.text  = [tdm getPrimarySpeakerString];
+        cell.uiRating.image  = [UIImage imageNamed:[NSString stringWithFormat:@"rating-%d.gif", (int) tdm.rating]];
+        cell.uiNumComments.text = [NSString stringWithFormat:@"%d", (int) tdm.commentCount];
+        
+        cell.uiTime.text     = [tdm getTimeString:self.event];
+        
+        if ([tdm.type isEqualToString:@"Talk"]) {
+            cell.uiTalkType.image  = [UIImage imageNamed:@"talk.gif"];
+        } else if ([tdm.type isEqualToString:@"Keynote"]) {
+            cell.uiTalkType.image  = [UIImage imageNamed:@"keynote.gif"];
+        } else if ([tdm.type isEqualToString:@"Social Event"]) {
+            cell.uiTalkType.image  = [UIImage imageNamed:@"social-event.gif"];
+        } else if ([tdm.type isEqualToString:@"Event Related"]) {
+            cell.uiTalkType.image  = [UIImage imageNamed:@"workshop.gif"];
+        } else {
+            cell.uiTalkType.image  = nil;
+        }
+        
+        UserTalkCommentDetailModel *utcdm = [self.comments getCommentForTalk:tdm];
+        
+        if (utcdm == nil) {
+            cell.uiCommentBubble.image = [UIImage imageNamed:@"icon-comment.gif"];
+        } else {
+            cell.uiCommentBubble.image = [UIImage imageNamed:@"icon-comment-user.gif"];
+        }
+        
+        cell.uiTracks.text = [tdm.tracks getStringTrackList];
+        
+        return cell;
+    } else {
+        static NSString *CellIdentifier = @"EventTalkViewCell";
+        
+        EventTalkViewCell *cell = (EventTalkViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"EventTalkCell" owner:nil options:nil];
+            for (id currentObject in topLevelObjects) {
+                if ([currentObject isKindOfClass:[EventTalkViewCell class]]) {
+                    cell = (EventTalkViewCell *)currentObject;
+                    break;
+                }
+            }
+        }
+        
+        cell.uiTalkName.text = tdm.title;
+        cell.uiSpeaker.text  = [tdm getPrimarySpeakerString];
+        cell.uiRating.image  = [UIImage imageNamed:[NSString stringWithFormat:@"rating-%d.gif", (int) tdm.rating]];
+        cell.uiNumComments.text = [NSString stringWithFormat:@"%d", (int) tdm.commentCount];
+        
+        cell.uiTime.text     = [tdm getTimeString:self.event];
+        
+        if ([tdm.type isEqualToString:@"Talk"]) {
+            cell.uiTalkType.image  = [UIImage imageNamed:@"talk.gif"];
+        } else if ([tdm.type isEqualToString:@"Keynote"]) {
+            cell.uiTalkType.image  = [UIImage imageNamed:@"keynote.gif"];
+        } else if ([tdm.type isEqualToString:@"Social Event"]) {
+            cell.uiTalkType.image  = [UIImage imageNamed:@"social-event.gif"];
+        } else if ([tdm.type isEqualToString:@"Event Related"]) {
+            cell.uiTalkType.image  = [UIImage imageNamed:@"workshop.gif"];
+        } else {
+            cell.uiTalkType.image  = nil;
+        }
+        
+        UserTalkCommentDetailModel *utcdm = [self.comments getCommentForTalk:tdm];
+        
+        if (utcdm == nil) {
+            cell.uiCommentBubble.image = [UIImage imageNamed:@"icon-comment.gif"];
+        } else {
+            cell.uiCommentBubble.image = [UIImage imageNamed:@"icon-comment-user.gif"];
+        }
+        
+        return cell;
+    }
 }
 
 
 // Override to support row selection in the table view.
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	
-	TalkDetailModel *tdm;
-	if ([indexPath section] == 0) {
-		tdm = [self.talks.talksNow objectAtIndex:[indexPath row]];
-	} else {
-		tdm = [self.talks.talksNext objectAtIndex:[indexPath row]];
-	}
-	
-	TalkDetailViewController *talkDetailViewController = [[TalkDetailViewController alloc] initWithNibName:@"TalkDetailView" bundle:nil];
-	talkDetailViewController.talk  = tdm;
-	talkDetailViewController.event = self.event;
-	[self.navigationController pushViewController:talkDetailViewController animated:YES];
-	[tableView deselectRowAtIndexPath:indexPath animated:YES]; // Deselect the talk row in the event detail screen
-	[talkDetailViewController release];
-	
+    
+    TalkDetailModel *tdm;
+    if ([indexPath section] == 0) {
+        tdm = [self.talks.talksNow objectAtIndex:[indexPath row]];
+    } else {
+        tdm = [self.talks.talksNext objectAtIndex:[indexPath row]];
+    }
+    
+    TalkDetailViewController *talkDetailViewController = [[TalkDetailViewController alloc] initWithNibName:@"TalkDetailView" bundle:nil];
+    talkDetailViewController.talk  = tdm;
+    talkDetailViewController.event = self.event;
+    [self.navigationController pushViewController:talkDetailViewController animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES]; // Deselect the talk row in the event detail screen
+    [talkDetailViewController release];
+    
 }
 
 
@@ -277,21 +277,21 @@
 
 
 - (void)gotUserComments:(UserCommentListModel *)uclm error:(APIError *)err {
-	if (uclm == nil) {
-		// Can ignore errors - probably to do with the user not being logged-in
-	} else {
-		self.comments = uclm;
-		[(UITableView *)self.view reloadData];
-	}
+    if (uclm == nil) {
+        // Can ignore errors - probably to do with the user not being logged-in
+    } else {
+        self.comments = uclm;
+        [(UITableView *)self.view reloadData];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	if ([self.event hasTracks]) {
-		return 60.0f;
-	} else {
-		return 45.0f;
-	}
+    if ([self.event hasTracks]) {
+        return 60.0f;
+    } else {
+        return 45.0f;
+    }
 }
 
 

@@ -14,10 +14,10 @@
 #import "EventListModel.h"
 
 @interface EventListViewController : UITableViewController {
-	EventListModel *confListData;
-	IBOutlet UIView *uiTableHeaderView;
-	IBOutlet UISegmentedControl *uiEventRange;
-	IBOutlet UITableViewCell *uiFetchingCell;
+    EventListModel *confListData;
+    IBOutlet UIView *uiTableHeaderView;
+    IBOutlet UISegmentedControl *uiEventRange;
+    IBOutlet UITableViewCell *uiFetchingCell;
 }
 
 @property(nonatomic, retain) EventListModel *confListData;

@@ -19,10 +19,10 @@
 @synthesize type;
 
 +(id)APIErrorWithMsg:(NSString *)_msg type:(APIErrType)type {
-	APIError *e = [[APIError alloc] autorelease];
-	e.msg = _msg;
-	e.type = type;
-	return e;
+    APIError *e = [[APIError alloc] autorelease];
+    e.msg = _msg;
+    e.type = type;
+    return e;
 }
 
 @end

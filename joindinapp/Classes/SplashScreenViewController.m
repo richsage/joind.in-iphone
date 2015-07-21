@@ -34,41 +34,41 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-	//self.havePendingAction = NO;
-	
+    //self.havePendingAction = NO;
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-	[super viewDidAppear:animated];
-	
-	EventListViewController *rvc = [[EventListViewController alloc] initWithNibName:@"EventListView" bundle:nil];
-	self.navC = [[UINavigationController alloc] initWithRootViewController:rvc];
-	
-	[self performSelector:@selector(startApp) withObject:nil afterDelay:0.7f];
-	
+    [super viewDidAppear:animated];
+    
+    EventListViewController *rvc = [[EventListViewController alloc] initWithNibName:@"EventListView" bundle:nil];
+    self.navC = [[UINavigationController alloc] initWithRootViewController:rvc];
+    
+    [self performSelector:@selector(startApp) withObject:nil afterDelay:0.7f];
+    
 }
 
 - (void)startApp {
-	//rvc.confListData = eventListData;
-	/*
-	[navC release];
-	[rvc release];
-	 */
-	[[[self view] window] addSubview:[self.navC view]];
-	[[self view] removeFromSuperview];
-	
-	[self performSelector:@selector(performPendingActions) withObject:nil afterDelay:0.1f];
+    //rvc.confListData = eventListData;
+    /*
+    [navC release];
+    [rvc release];
+     */
+    [[[self view] window] addSubview:[self.navC view]];
+    [[self view] removeFromSuperview];
+    
+    [self performSelector:@selector(performPendingActions) withObject:nil afterDelay:0.1f];
 }
 
 - (IBAction) pressedWebsite {
-	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://joind.in/"]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://joind.in/"]];
 }
 
 - (void)didReceiveMemoryWarning {
-	// Releases the view if it doesn't have a superview.
+    // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-	
-	// Release any cached data, images, etc that aren't in use.
+    
+    // Release any cached data, images, etc that aren't in use.
 }
 
 - (void)dealloc {
@@ -79,64 +79,64 @@
 #pragma mark URL-launched methods
 
 - (void) performPendingActions {
-	if (self.havePendingAction) {
-		self.havePendingAction = NO;
-		if (self.pendingEventId > 0) {
-			[self reallyGotoEventScreenWithEventId:self.pendingEventId];
-		} else if (self.pendingTalkId > 0) {
-			[self reallyGotoTalkScreenWithTalkId:self.pendingTalkId];
-		}
-	}
+    if (self.havePendingAction) {
+        self.havePendingAction = NO;
+        if (self.pendingEventId > 0) {
+            [self reallyGotoEventScreenWithEventId:self.pendingEventId];
+        } else if (self.pendingTalkId > 0) {
+            [self reallyGotoTalkScreenWithTalkId:self.pendingTalkId];
+        }
+    }
 }
 
 #pragma mark URL-launched event
 
 - (void) gotoEventScreenWithEventId:(NSUInteger)eventId {
-	self.havePendingAction = YES;
-	self.pendingEventId = eventId;
+    self.havePendingAction = YES;
+    self.pendingEventId = eventId;
 }
 
 - (void) reallyGotoEventScreenWithEventId:(NSUInteger)eventId {
-	EventGetDetail *ed = [APICaller EventGetDetail:self];
-	[ed call:eventId];
+    EventGetDetail *ed = [APICaller EventGetDetail:self];
+    [ed call:eventId];
 }
 
 - (void) gotoEventScreenWithEventDetailModel:(EventDetailModel *)edm {
-	EventDetailViewController *eventDetailViewController = [[EventDetailViewController alloc] init];
-	eventDetailViewController.event = edm;
-	[self.navC pushViewController:eventDetailViewController animated:YES];
-	//[eventDetailViewController release];	
+    EventDetailViewController *eventDetailViewController = [[EventDetailViewController alloc] init];
+    eventDetailViewController.event = edm;
+    [self.navC pushViewController:eventDetailViewController animated:YES];
+    //[eventDetailViewController release];  
 }
 
 - (void)gotEventDetailData:(EventDetailModel *)edm error:(APIError *)err {
-	if (edm != nil) {
-		[self gotoEventScreenWithEventDetailModel:edm];
-	}
+    if (edm != nil) {
+        [self gotoEventScreenWithEventDetailModel:edm];
+    }
 }
 
 #pragma mark URL-launched talk
 
 - (void) gotoTalkScreenWithTalkId:(NSUInteger)talkId {
-	self.havePendingAction = YES;
-	self.pendingTalkId = talkId;
+    self.havePendingAction = YES;
+    self.pendingTalkId = talkId;
 }
 
 - (void) reallyGotoTalkScreenWithTalkId:(NSUInteger)talkId {
-	TalkGetDetail *td = [APICaller TalkGetDetail:self];
-	[td call:talkId];
+    TalkGetDetail *td = [APICaller TalkGetDetail:self];
+    [td call:talkId];
 }
 
 - (void) gotoTalkScreenWithTalkDetailModel:(TalkDetailModel *)tdm {
-	TalkDetailViewController *talkDetailViewController = [[TalkDetailViewController alloc] init];
-	talkDetailViewController.talk = tdm;
-	[self.navC pushViewController:talkDetailViewController animated:YES];
-	//[talkDetailViewController release];	
+    TalkDetailViewController *talkDetailViewController = [[TalkDetailViewController alloc] init];
+    talkDetailViewController.talk = tdm;
+    [self.navC pushViewController:talkDetailViewController animated:YES];
+    //[talkDetailViewController release];   
 }
 
 - (void)gotTalkDetailData:(TalkDetailModel *)tdm error:(APIError *)err {
-	if (tdm != nil) {
-		[self gotoTalkScreenWithTalkDetailModel:tdm];
-	}
+    if (tdm != nil) {
+        [self gotoTalkScreenWithTalkDetailModel:tdm];
+    }
 }
 
 @end

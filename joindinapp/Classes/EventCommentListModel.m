@@ -19,21 +19,21 @@
 @synthesize comments;
 
 - (EventCommentListModel *)init {
-	self.comments = [NSMutableArray array];
-	return self;
+    self.comments = [NSMutableArray array];
+    return self;
 }
 
 - (void)addComment:(EventCommentDetailModel *)ecdm {
-	[ecdm retain];
-	[self.comments addObject:ecdm];
+    [ecdm retain];
+    [self.comments addObject:ecdm];
 }
 
 - (EventCommentDetailModel *)getEventCommentAtIndex:(NSUInteger)idx {
-	return [self.comments objectAtIndex:idx];
+    return [self.comments objectAtIndex:idx];
 }
 
 - (NSUInteger)getNumComments {
-	return [self.comments count];
+    return [self.comments count];
 }
 
 
