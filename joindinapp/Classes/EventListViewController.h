@@ -16,14 +16,13 @@
 @interface EventListViewController : UIViewController <UITableViewDelegate> {
 	EventListModel *confListData;
 	IBOutlet UIView *uiTableHeaderView;
-	IBOutlet UISegmentedControl *uiEventRange;
 	IBOutlet UITableViewCell *uiFetchingCell;
     IBOutlet UITableView *eventListTableView;
 }
 
 @property(nonatomic, retain) EventListModel *confListData;
 @property(nonatomic, retain) UIView *uiTableHeaderView;
-@property(nonatomic, retain) UISegmentedControl *uiEventRange;
+@property (retain, nonatomic) IBOutlet UISegmentedControl *uiEventRange;
 @property(nonatomic, retain) UITableViewCell *uiFetchingCell;
 @property(nonatomic, retain) UITableView *eventListTableView;
 

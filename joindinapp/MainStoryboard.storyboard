@@ -59,6 +59,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="eventListTableView" destination="ft7-Sq-YRm" id="ua2-TX-6c5"/>
+                        <outlet property="uiEventRange" destination="UhN-TK-WzU" id="s8e-H0-dfB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TEC-Kh-tPY" userLabel="First Responder" sceneMemberID="firstResponder"/>

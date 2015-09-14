@@ -21,7 +21,6 @@
 @implementation EventListViewController
 
 @synthesize confListData;
-@synthesize uiEventRange;
 @synthesize uiTableHeaderView;
 @synthesize uiFetchingCell;
 @synthesize eventListTableView;
